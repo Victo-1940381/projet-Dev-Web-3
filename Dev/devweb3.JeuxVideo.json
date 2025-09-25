@@ -23,7 +23,8 @@
   "ESRB": "E",
   "modeDeJeu": [
     "solo",
-    "multijoueur"
+    "multijoueur local",
+    "multijoueur en ligne"
   ],
   "dureeJeux": 10,
   "disponible": true,
@@ -55,7 +56,7 @@
   "ESRB": "E",
   "modeDeJeu": [
     "solo",
-    "multijoueur"
+    "multijoueur local"
   ],
   "dureeJeux": 0,
   "disponible": false,

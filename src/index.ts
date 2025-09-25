@@ -1,5 +1,5 @@
 import logger from 'jet-logger';
-
+import { connect } from "mongoose";
 import ENV from '@src/common/constants/ENV';
 import server from './server';
 
@@ -18,10 +18,6 @@ const SERVER_START_MSG = (
 ******************************************************************************/
 
 // Start the server
-server.listen(ENV.Port, err => {
-  if (!!err) {
-    logger.err(err.message);
-  } else {
-    logger.info(SERVER_START_MSG);
-  }
-});
+connect(ENV.Mongodb).then(() =>
+  server.listen(ENV.Port, () => logger.info(SERVER_START_MSG))
+);

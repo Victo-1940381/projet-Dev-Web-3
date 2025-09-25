@@ -1,0 +1,8 @@
+Prix:prix actuel du jeux ou dernier prix afficher
+datesortieInitial: première date de sortie du jeux
+nombreCopieVendu: entré le nombre complet exemple: 20 millions = 20000000
+ESRB: entré la lettre de classement de l'ESRB
+durée du jeux: entre la durée en heure du jeux pour l'histoire principal (utiliser howlongtobeat.com) si il a pas d'histoire entré 0
+Metacritic: entré la note du jeux de metacritic(metascore)
+disponible: si le jeux est toujours disponible a l'achat
+mode de jeux: indiqué les différent mode de jeux posible exemple: solo,multijoueur en ligne,multijoueur local...

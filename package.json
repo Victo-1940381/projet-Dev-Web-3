@@ -29,10 +29,12 @@
     "jet-validators": "^1.4.3",
     "jsonfile": "^6.2.0",
     "module-alias": "^2.2.3",
+    "mongoose": "^8.18.2",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@jazim/mock-mongoose": "^1.0.1",
     "@swc/core": "^1.13.19",
     "@types/cookie-parser": "^1.4.9",
     "@types/find": "^0.2.4",
