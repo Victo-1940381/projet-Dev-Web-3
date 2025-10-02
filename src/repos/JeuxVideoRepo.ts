@@ -17,10 +17,9 @@ async function getOne(id: string): Promise<IJeuxVideo | null> {
  });
  return jeuxvideo;
 }
-async function getPlatformeERSB(platforme: string,ersb:string) : Promise<IJeuxVideo[]> {
+async function getPlatforme(platforme: string) : Promise<IJeuxVideo[]> {
     const jeuxvideo = await JeuxVideo.find({
         platforme:platforme,
-        ESRB:ersb,
     })
     return jeuxvideo
 }
@@ -30,6 +29,12 @@ async function getPlatformeERSB(platforme: string,ersb:string) : Promise<IJeuxVi
 async function getAll(): Promise<IJeuxVideo[]> {
   const jeuxvideos = await JeuxVideo.find();
   return jeuxvideos;
+}
+async function getGenre(genre: string) : Promise<IJeuxVideo[]> {
+    const jeuxvideo = await JeuxVideo.find({
+       genre:genre
+    })
+    return jeuxvideo
 }
 /**
  * Add one user.
@@ -84,8 +89,9 @@ async function delete_(id: string): Promise<void> {
 
 export default {
   getOne,
-  getPlatformeERSB,
+  getPlatforme,
   getAll,
+  getGenre,
   add,
   update,
   delete: delete_,
