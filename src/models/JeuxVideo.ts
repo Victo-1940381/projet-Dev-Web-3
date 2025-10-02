@@ -37,18 +37,28 @@ export interface IJeuxVideo extends IModel {
 const JeuxVideoSchema = new Schema<IJeuxVideo>({
     id:{type:Number, required:[true,"l'id est requis"],min:[0,"l'id ne doit pas etre negatif"]},
     nom:{type:String, required:[true,"le nom est requis"]},
-    platforme:{type:[String],required:[true,"les platformes du jeux sont requis"]},
-    dateSortieinitial:{type:Date,required:[true,"la date de soritir du jeux est requis"]},
+    platforme:{type:[String],required:[true,"les platformes du jeux sont requis"],validate:{
+      validator: function (v){
+        return v.lenght > 0;
+      },
+      message: "il doit avoir au moins une platforme dans la liste",
+    }},
+    dateSortieinitial:{type:Date,required:[true,"la date de sortie du jeux est requis"]},
     nombreCopieVendu:{type:Number,required:[true,"le nombre de copie vendu du jeux est requis"]},
     prix:{type:Number,required:[true,"le prix du jeux est requis"],min:[0,"le prix doit etre positif"]},
     developpeur:{type:[String],required:[true,"le ou les developpeur sont requis"]},
     editeur:{type:[String],required:[true,"le ou les editeur sont requis"]},
     genre:{type:[String],required:[true,"le ou les genre sont requis"]},
-    ESRB:{type:String},
+    ESRB:{type:String,validate:{
+      validator: function (v){
+        return /(\bA\b)|(\bT\b)|(\bM\b)|(\bE\b)|(\bRP\b)/.test(v);
+      },
+      message: 'Le Classement ESRB doit etre soit : A , E, T, M ou  RP',
+    }},
     modeDeJeu:{type:[String],required:[true,"les modes de jeux sont requis"]},
     dureeJeux:{type:Number,required:[true,"la durée du jeux est requis"]},
     disponible:{type:Boolean,required:[true,"la disponibilité du jeu est requis"]},
-    Metacritic:{type:Number},
+    Metacritic:{type:Number,max:[100,"le score metacritic ne doit pas dépassé 100"]},
 });
 
 
