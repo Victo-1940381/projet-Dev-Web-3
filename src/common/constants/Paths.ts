@@ -1,11 +1,14 @@
 
 export default {
   Base: '/api',
-  Users: {
-    Base: '/users',
-    Get: '/all',
-    Add: '/add',
-    Update: '/update',
-    Delete: '/delete/:id',
+  jeuxvideo: {
+    Base: '/jeuxvideo',
+    Getall: '/liste',
+    GetOne: '/:id',
+    GetGenre: '/genre/:genre',
+    GetPlatforme: '/plateforme/:plateforme',
+    Add: '/ajouter',
+    Update: '/modifier',
+    Delete: '/supprimer/:id',
   },
 } as const;
