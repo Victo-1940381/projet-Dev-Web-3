@@ -35,14 +35,14 @@ function getGenre(genre: string): Promise<IJeuxVideo[]>{
 /**
  * Add one user.
  */
-function addOne(user: IUser): Promise<void> {
-  return UserRepo.add(user);
+function addOne(jeuxvideo: IJeuxVideo): Promise<void> {
+  return JeuxVideoRepo.add(jeuxvideo);
 }
 
 /**
  * Update one user.
  */
-async function updateOne(user: IUser): Promise<void> {
+async function updateOne(jeuxvideo:IJeuxVideo): Promise<void> {
   const persists = await UserRepo.persists(user.id);
   if (!persists) {
     throw new RouteError(

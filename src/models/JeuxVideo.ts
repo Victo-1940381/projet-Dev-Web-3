@@ -18,7 +18,7 @@ import { model, Schema } from 'mongoose';
 ******************************************************************************/
 
 export interface IJeuxVideo extends IModel {
-  id: number;
+  _id?: string;
   nom: string;
   platforme: string[];
   dateSortieinitial:Date;
@@ -35,7 +35,7 @@ export interface IJeuxVideo extends IModel {
 }
 
 const JeuxVideoSchema = new Schema<IJeuxVideo>({
-    id:{type:Number, required:[true,"l'id est requis"],min:[0,"l'id ne doit pas etre negatif"]},
+    _id:{type:String},
     nom:{type:String, required:[true,"le nom est requis"]},
     platforme:{type:[String],required:[true,"les platformes du jeux sont requis"],validate:{
       validator: function (v){

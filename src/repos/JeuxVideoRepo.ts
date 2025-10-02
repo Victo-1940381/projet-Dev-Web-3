@@ -13,7 +13,7 @@ import { error } from 'console';
  */
 async function getOne(id: string): Promise<IJeuxVideo | null> {
  const jeuxvideo = await JeuxVideo.findOne({
-    id: id,
+    _id: id,
  });
  return jeuxvideo;
 }
@@ -48,7 +48,7 @@ async function add(jeuxvideo: IJeuxVideo): Promise<void> {
  * Update a user.
  */
 async function update(jeuxvideo:IJeuxVideo): Promise<void> {
- const jeuxAModifier = await JeuxVideo.findOne({ id: jeuxvideo.id});
+ const jeuxAModifier = await JeuxVideo.findOne({ _id: jeuxvideo._id});
  if (jeuxAModifier === null){
     throw new Error("jeux video non trouvé");
  }
@@ -72,7 +72,7 @@ async function update(jeuxvideo:IJeuxVideo): Promise<void> {
  * Delete one user.
  */
 async function delete_(id: string): Promise<void> {
-    await JeuxVideo.deleteOne({id:id});
+    await JeuxVideo.deleteOne({_id:id});
 }
 
 
