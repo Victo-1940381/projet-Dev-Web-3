@@ -10,9 +10,7 @@ import { error } from 'console';
 
 
 async function getOne(id: string): Promise<IJeuxVideo | null> {
- const jeuxvideo = await JeuxVideo.findOne({
-    _id: id,
- });
+ const jeuxvideo = await JeuxVideo.findById(id);
  return jeuxvideo;
 }
 async function getPlatforme(platforme: string) : Promise<IJeuxVideo[]> {
@@ -40,7 +38,7 @@ async function add(jeuxvideo: IJeuxVideo): Promise<void> {
 
 
 async function update(jeuxvideo:IJeuxVideo): Promise<void> {
- const jeuxAModifier = await JeuxVideo.findOne({ _id: jeuxvideo._id});
+ const jeuxAModifier = await JeuxVideo.findOne({ _id: jeuxvideo.id});
  if (jeuxAModifier === null){
     throw new Error("jeux video non trouvé");
  }

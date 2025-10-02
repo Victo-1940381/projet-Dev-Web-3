@@ -4,7 +4,7 @@ import { parseObject, TParseOnError } from 'jet-validators/utils';
 import { isRelationalKey, transIsDate } from '@src/common/util/validators';
 import { IModel } from './common/types';
 import { platform } from 'os';
-import { model, Schema } from 'mongoose';
+import mongoose, { model, Schema } from 'mongoose';
 
 
 /******************************************************************************
@@ -17,8 +17,8 @@ import { model, Schema } from 'mongoose';
                                   Types
 ******************************************************************************/
 
-export interface IJeuxVideo extends IModel {
-  _id: string;
+export interface IJeuxVideo {
+  id: string;
   nom: string;
   platforme: string[];
   dateSortieinitial:Date;
@@ -35,7 +35,7 @@ export interface IJeuxVideo extends IModel {
 }
 
 const JeuxVideoSchema = new Schema<IJeuxVideo>({
-    _id:{type:String},
+    id:{type:String},
     nom:{type:String, required:[true,"le nom est requis"]},
     platforme:{type:[String],required:[true,"les platformes du jeux sont requis"],validate:{
       validator: function (v){
@@ -68,5 +68,5 @@ const JeuxVideoSchema = new Schema<IJeuxVideo>({
 /******************************************************************************
                                 Export default
 ******************************************************************************/
-
+mongoose.pluralize(null)
 export const JeuxVideo = model<IJeuxVideo>('JeuxVideo', JeuxVideoSchema);
