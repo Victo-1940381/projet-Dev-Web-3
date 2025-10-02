@@ -8,9 +8,7 @@ import { error } from 'console';
                                 Functions
 ******************************************************************************/
 
-/**
- * Get one user.
- */
+
 async function getOne(id: string): Promise<IJeuxVideo | null> {
  const jeuxvideo = await JeuxVideo.findOne({
     _id: id,
@@ -23,9 +21,7 @@ async function getPlatforme(platforme: string) : Promise<IJeuxVideo[]> {
     })
     return jeuxvideo
 }
-/**
- * Get all users.
- */
+
 async function getAll(): Promise<IJeuxVideo[]> {
   const jeuxvideos = await JeuxVideo.find();
   return jeuxvideos;
@@ -36,17 +32,13 @@ async function getGenre(genre: string) : Promise<IJeuxVideo[]> {
     })
     return jeuxvideo
 }
-/**
- * Add one user.
- */
+
 async function add(jeuxvideo: IJeuxVideo): Promise<void> {
   const nouveljeuxvideo = new JeuxVideo(jeuxvideo);
   await nouveljeuxvideo.save();
 }
 
-/**
- * Update a user.
- */
+
 async function update(jeuxvideo:IJeuxVideo): Promise<void> {
  const jeuxAModifier = await JeuxVideo.findOne({ _id: jeuxvideo._id});
  if (jeuxAModifier === null){
@@ -68,18 +60,12 @@ async function update(jeuxvideo:IJeuxVideo): Promise<void> {
   
 }
 
-/**
- * Delete one user.
- */
+
 async function delete_(id: string): Promise<void> {
     await JeuxVideo.deleteOne({_id:id});
 }
 
 
-
-/**
- * Insert multiple users. Can't do multiple at once cause using a plain file 
- * for nmow.
 
 
 

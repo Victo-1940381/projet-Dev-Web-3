@@ -16,9 +16,6 @@ export const JEUXVIDEO_NON_TROUVE = 'jeux vidéo non trouvée';
                                 Functions
 ******************************************************************************/
 
-/**
- * Get all users.
- */
 function getAll(): Promise<IJeuxVideo[]> {
   return JeuxVideoRepo.getAll();
 }
@@ -32,16 +29,12 @@ function getPlatforme(platforme:string) : Promise<IJeuxVideo[]>{
 function getGenre(genre: string): Promise<IJeuxVideo[]>{
     return JeuxVideoRepo.getGenre(genre);
 }
-/**
- * Add one user.
- */
+
 function addOne(jeuxvideo: IJeuxVideo): Promise<void> {
   return JeuxVideoRepo.add(jeuxvideo);
 }
 
-/**
- * Update one user.
- */
+
 async function updateOne(jeuxvideo:IJeuxVideo): Promise<void> {
  const persists = await JeuxVideoRepo.getOne(jeuxvideo._id);
  if(!persists){
@@ -50,9 +43,7 @@ async function updateOne(jeuxvideo:IJeuxVideo): Promise<void> {
  return JeuxVideoRepo.update(jeuxvideo);
 }
 
-/**
- * Delete a user by their id.
- */
+
 async function _delete(id: string): Promise<void> {
   const persists = await JeuxVideoRepo.getOne(id);
   if (!persists) {
@@ -61,7 +52,7 @@ async function _delete(id: string): Promise<void> {
       JEUXVIDEO_NON_TROUVE,
     );
   }
-  // Delete user
+
   return JeuxVideoRepo.delete(id);
 }
 

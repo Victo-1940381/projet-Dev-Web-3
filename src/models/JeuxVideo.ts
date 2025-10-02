@@ -63,9 +63,6 @@ const JeuxVideoSchema = new Schema<IJeuxVideo>({
 
 
 
-/*true,"la disponibilité du jeu est requis"*
-,
-Metacritic:{type:Number}, * Check is a user object. For the route validation.
 
 
 /******************************************************************************
