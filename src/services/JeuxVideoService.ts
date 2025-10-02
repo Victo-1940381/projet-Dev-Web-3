@@ -43,30 +43,26 @@ function addOne(jeuxvideo: IJeuxVideo): Promise<void> {
  * Update one user.
  */
 async function updateOne(jeuxvideo:IJeuxVideo): Promise<void> {
-  const persists = await UserRepo.persists(user.id);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
-    );
-  }
-  // Return user
-  return UserRepo.update(user);
+ const persists = await JeuxVideoRepo.getOne(jeuxvideo._id);
+ if(!persists){
+  throw new RouteError(HttpStatusCodes.NOT_FOUND, JEUXVIDEO_NON_TROUVE);
+ }
+ return JeuxVideoRepo.update(jeuxvideo);
 }
 
 /**
  * Delete a user by their id.
  */
-async function _delete(id: number): Promise<void> {
-  const persists = await UserRepo.persists(id);
+async function _delete(id: string): Promise<void> {
+  const persists = await JeuxVideoRepo.getOne(id);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
+      JEUXVIDEO_NON_TROUVE,
     );
   }
   // Delete user
-  return UserRepo.delete(id);
+  return JeuxVideoRepo.delete(id);
 }
 
 
@@ -76,6 +72,9 @@ async function _delete(id: number): Promise<void> {
 
 export default {
   getAll,
+  getOne,
+  getGenre,
+  getPlatforme,
   addOne,
   updateOne,
   delete: _delete,

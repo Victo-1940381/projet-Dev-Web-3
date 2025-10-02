@@ -18,7 +18,7 @@ import { model, Schema } from 'mongoose';
 ******************************************************************************/
 
 export interface IJeuxVideo extends IModel {
-  _id?: string;
+  _id: string;
   nom: string;
   platforme: string[];
   dateSortieinitial:Date;
