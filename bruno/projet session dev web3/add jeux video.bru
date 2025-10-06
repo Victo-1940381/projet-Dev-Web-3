@@ -1,0 +1,47 @@
+meta {
+  name: add jeux video
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3000/api/jeuxvideo/ajouter
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "jeuxvideo":{
+        "nom": "Legend of Zelda Breath of the Wild",
+        "plateforme": [
+         "Nintendo Switch",
+          "Nintendo Switch 2",
+          "Wii U"
+        ],
+        "dateSortieinitial": "2017-03-03",
+        "nombreCopieVendu": 33040000,
+        "prix": 79.99,
+        "developpeur": [
+         "Nintendo"
+        ],
+        "editeur": [
+          "Nintendo"
+        ],
+        "genre": [
+          "Action-aventure"
+        ],
+        "ESRB": "E",
+        "modeDeJeu": [
+          "solo"
+        ],
+        "dureeJeux": 50.5,
+        "disponible": true,
+        "Metacritic": 95
+    }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

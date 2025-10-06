@@ -33,8 +33,7 @@ async function add(req: IReq, res: IRes) {
   const { jeuxvideo } = req.body;
   await JeuxVideoService.addOne(jeuxvideo as IJeuxVideo);
   res.status(HttpStatusCodes.CREATED).json({
-    "Message":"le jeux a été ajouter",
-    "jeux":jeuxvideo
+    "Message":"le jeux a été ajouter"
   });
 }
 
@@ -43,8 +42,7 @@ async function update(req: IReq, res: IRes) {
   const { jeuxvideo } = req.body;
   await JeuxVideoService.updateOne(jeuxvideo as IJeuxVideo);
   res.status(HttpStatusCodes.OK).json({
-    "message":"le jeux vidéo a été modifier",
-    "jeux":jeuxvideo
+    "message":"le jeux vidéo a été modifier"
   });
 }
 

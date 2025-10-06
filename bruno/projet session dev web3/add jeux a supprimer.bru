@@ -1,0 +1,43 @@
+meta {
+  name: add jeux a supprimer
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:3000/api/jeuxvideo/ajouter
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "jeuxvideo":{
+        "nom": "jeux a supprimer",
+        "plateforme": [
+         "Windows 95"
+        ],
+        "dateSortieinitial": "1993-04-15",
+        "nombreCopieVendu": 1,
+        "prix": 1,
+        "developpeur": [
+         "Test"
+        ],
+        "editeur": [
+          "Test"
+        ],
+        "genre": [
+          "Aucun"
+        ],
+        "modeDeJeu": [
+          "solo"
+        ],
+        "dureeJeux": 50.5,
+        "disponible": true
+    }
+  }
+}
+
+settings {
+  encodeUrl: true
+}
