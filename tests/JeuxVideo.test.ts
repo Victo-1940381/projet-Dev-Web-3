@@ -14,7 +14,7 @@ import { agent } from './support/setup';
 
 
 const DB_JEUXVIDEO: IJeuxVideo[] = [
-        {
+      {
             id:"1",
   nom: "super mario bros wonder",
   plateforme: [
@@ -123,10 +123,10 @@ describe('JeuxVideoRouter', () => {
             async () => {
                 const data = [...DB_JEUXVIDEO];
                 mockify(JeuxVideo).toReturn(data, 'find');
-                const res: TRes<{ jeuxVideos: IJeuxVideo[]}> = await agent.get(Paths.jeuxvideo.Getall);
+                const res: TRes<{ jeuxvideos: IJeuxVideo[]}> = await agent.get(Paths.jeuxvideo.Getall);
 
                 expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxVideos, DB_JEUXVIDEO)).toBeTruthy();
+                expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO)).toBeTruthy();
             },
         );
     });
