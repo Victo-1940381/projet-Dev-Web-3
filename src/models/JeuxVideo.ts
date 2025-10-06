@@ -20,7 +20,7 @@ import mongoose, { model, Schema } from 'mongoose';
 export interface IJeuxVideo {
   id: string;
   nom: string;
-  platforme: string[];
+  plateforme: string[];
   dateSortieinitial:Date;
   nombreCopieVendu:number;
   prix:number;
@@ -37,12 +37,14 @@ export interface IJeuxVideo {
 const JeuxVideoSchema = new Schema<IJeuxVideo>({
     id:{type:String},
     nom:{type:String, required:[true,"le nom est requis"]},
-    platforme:{type:[String],required:[true,"les platformes du jeux sont requis"],validate:{
+    plateforme:{type:[String],required:[true,"les plateformes du jeux sont requis"],
+      validate:{
       validator: function (v){
-        return v.lenght > 0;
+        return v && v.length > 0;
       },
-      message: "il doit avoir au moins une platforme dans la liste",
-    }},
+      message: "il doit avoir au moins une plateforme dans la liste",
+    }
+  },
     dateSortieinitial:{type:Date,required:[true,"la date de sortie du jeux est requis"]},
     nombreCopieVendu:{type:Number,required:[true,"le nombre de copie vendu du jeux est requis"]},
     prix:{type:Number,required:[true,"le prix du jeux est requis"],min:[0,"le prix doit etre positif"]},

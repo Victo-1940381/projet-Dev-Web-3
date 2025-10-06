@@ -13,9 +13,9 @@ async function getOne(id: string): Promise<IJeuxVideo | null> {
  const jeuxvideo = await JeuxVideo.findById(id);
  return jeuxvideo;
 }
-async function getPlatforme(platforme: string) : Promise<IJeuxVideo[]> {
+async function getPlatforme(plateforme: string) : Promise<IJeuxVideo[]> {
     const jeuxvideo = await JeuxVideo.find({
-        platforme:platforme,
+        plateforme:plateforme,
     })
     return jeuxvideo
 }
@@ -38,12 +38,12 @@ async function add(jeuxvideo: IJeuxVideo): Promise<void> {
 
 
 async function update(jeuxvideo:IJeuxVideo): Promise<void> {
- const jeuxAModifier = await JeuxVideo.findOne({ _id: jeuxvideo.id});
+ const jeuxAModifier = await JeuxVideo.findById(jeuxvideo.id);
  if (jeuxAModifier === null){
     throw new Error("jeux video non trouvé");
  }
  jeuxAModifier.nom = jeuxvideo.nom;
- jeuxAModifier.platforme = jeuxvideo.platforme;
+ jeuxAModifier.plateforme = jeuxvideo.plateforme;
  jeuxAModifier.dateSortieinitial = jeuxvideo.dateSortieinitial;
  jeuxAModifier.nombreCopieVendu = jeuxvideo.nombreCopieVendu;
  jeuxAModifier.prix = jeuxvideo.prix;
@@ -55,7 +55,7 @@ async function update(jeuxvideo:IJeuxVideo): Promise<void> {
  jeuxAModifier.dureeJeux = jeuxvideo.dureeJeux;
  jeuxAModifier.disponible = jeuxvideo.disponible;
  jeuxAModifier.Metacritic = jeuxvideo.Metacritic;
-  
+jeuxAModifier.save();
 }
 
 

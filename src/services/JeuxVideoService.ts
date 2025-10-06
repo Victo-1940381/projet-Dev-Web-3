@@ -23,8 +23,8 @@ function getOne(id:string) : Promise<IJeuxVideo | null>{
     return JeuxVideoRepo.getOne(id);
 }
 
-function getPlatforme(platforme:string) : Promise<IJeuxVideo[]>{
-    return JeuxVideoRepo.getPlatforme(platforme);
+function getPlatforme(plateforme:string) : Promise<IJeuxVideo[]>{
+    return JeuxVideoRepo.getPlatforme(plateforme);
 }
 function getGenre(genre: string): Promise<IJeuxVideo[]>{
     return JeuxVideoRepo.getGenre(genre);

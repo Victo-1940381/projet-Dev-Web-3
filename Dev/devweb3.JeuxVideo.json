@@ -3,7 +3,7 @@
     "$oid": "68d57bed9458d8096468aa40"
   },
   "nom": "super mario bros wonder",
-  "platforme": [
+  "plateforme": [
     "Nintendo Switch"
   ],
   "dateSortieinitial": {
@@ -35,7 +35,7 @@
     "$oid": "68d57bed9458d8096468aa41"
   },
   "nom": "super mario 3d all-star",
-  "platforme": [
+  "plateforme": [
     "Nintendo Switch"
   ],
   "dateSortieinitial": {
@@ -67,7 +67,7 @@
     "$oid": "68d57bed9458d8096468aa42"
   },
   "nom": "Doom",
-  "platforme": [
+  "plateforme": [
     "Windows",
     "Mac OS",
     "Linux",

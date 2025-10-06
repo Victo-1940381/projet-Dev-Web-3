@@ -1,0 +1,57 @@
+meta {
+  name: update jeux video
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/api/jeuxvideo/modifier
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "jeuxvideo": {
+        "id": "68d57bed9458d8096468aa42",
+        "nom": "Doom",
+        "plateforme": [
+          "Windows",
+          "Mac OS",
+          "Linux",
+          "32X",
+          "3DO",
+          "GBA",
+          "Jaguar",
+          "Playstation",
+          "Xbox 360",
+          "Super nintendo",
+          "Nintendo Switch"
+        ],
+        "dateSortieinitial": "1994-01-10T05:00:00.000Z",
+        "nombreCopieVendu": 20000000,
+        "prix": 6.04,
+        "developpeur": [
+          "id software",
+          " Nightdive Studio"
+        ],
+        "editeur": [
+          "Bethesda"
+        ],
+        "genre": [
+          "FPS"
+        ],
+        "ESRB": "M",
+        "modeDeJeu": [
+          "solo"
+        ],
+        "dureeJeux": 5,
+        "disponible": true,
+        "Metacritic": 82
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}
