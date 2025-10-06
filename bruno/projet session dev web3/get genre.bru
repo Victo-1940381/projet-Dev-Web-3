@@ -1,0 +1,19 @@
+meta {
+  name: get genre
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:3000/api/jeuxvideo/genre/:genre
+  body: none
+  auth: inherit
+}
+
+params:path {
+  genre: FPS
+}
+
+settings {
+  encodeUrl: true
+}

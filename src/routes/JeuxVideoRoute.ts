@@ -24,8 +24,8 @@ async function getGenre(req: IReq, res:IRes) {
     res.status (HttpStatusCodes.OK).json({jeuxvideos});
 }
 async function getPlatforme(req: IReq, res:IRes) {
-    const { platforme } = req.params;
-    const jeuxvideos = await JeuxVideoService.getPlatforme(platforme as string);
+    const { plateforme } = req.params;
+    const jeuxvideos = await JeuxVideoService.getPlatforme(plateforme as string);
     res.status(HttpStatusCodes.OK).json({jeuxvideos});
 }
 

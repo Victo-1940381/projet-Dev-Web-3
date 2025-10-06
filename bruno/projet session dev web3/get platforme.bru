@@ -1,0 +1,19 @@
+meta {
+  name: get platforme
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/api/jeuxvideo/plateforme/:plateforme
+  body: none
+  auth: inherit
+}
+
+params:path {
+  plateforme: Nintendo Switch
+}
+
+settings {
+  encodeUrl: true
+}
