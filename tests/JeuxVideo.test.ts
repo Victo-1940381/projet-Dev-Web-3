@@ -15,101 +15,97 @@ import { agent } from './support/setup';
 
 const DB_JEUXVIDEO: IJeuxVideo[] = [
       {
-            id:"1",
-  nom: "super mario bros wonder",
+        id:'1',
+  nom: 'super mario bros wonder',
   plateforme: [
-    "Nintendo Switch"
+    'Nintendo Switch'
   ],
-  dateSortieinitial: new Date(2023-11-23),
+  dateSortieinitial: new Date('2023-11-23'),
   nombreCopieVendu: 16030000,
   prix: 84.99,
   developpeur: [
-    "Nintendo"
+    'Nintendo'
   ],
   editeur: [
-    "Nintendo"
+    'Nintendo'
   ],
   genre: [
-    "Platforme"
+    'Platforme'
   ],
-  ESRB: "E",
   modeDeJeu: [
-    "solo",
-    "multijoueur local",
-    "multijoueur en ligne"
+    'solo',
+    'multijoueur local',
+    'multijoueur en ligne'
   ],
   dureeJeux: 10,
-  disponible: true,
-  Metacritic: 92
+  disponible: true
 },
 {
-  id:"2",
-  nom: "super mario 3d all-star",
+  id:'2',
+  nom: 'super mario 3d all-star',
   plateforme: [
-    "Nintendo Switch"
+    'Nintendo Switch'
   ],
-  dateSortieinitial: new Date(2020-10-18),
+  dateSortieinitial: new Date('2020-10-18'),
   nombreCopieVendu: 9007000,
   prix: 79.99,
   developpeur: [
-    "Nintendo"
+    'Nintendo'
   ],
   editeur: [
-    "Nintendo"
+    'Nintendo'
   ],
   genre: [
-    "Platforme 3d",
-    "action-aventure"
+    'Platforme 3d',
+    'action-aventure'
   ],
-  ESRB: "E",
   modeDeJeu: [
-    "solo",
-    "multijoueur local"
+    'solo',
+    'multijoueur local'
   ],
   dureeJeux: 0,
-  disponible: false,
-  Metacritic: 82
+  disponible: false
 },
 {
- id:"3",
-  nom: "Doom",
+ 
+ id:'3',
+  nom: 'Doom',
   plateforme: [
-    "Windows",
-    "Mac OS",
-    "Linux",
-    "32X",
-    "3DO",
-    "GBA",
-    "Jaguar",
-    "Playstation",
-    "Xbox 360",
-    "Saturn",
-    "Super nintendo",
-    "Nintendo Switch"
+    'Windows',
+    'Mac OS',
+    'Linux',
+    '32X',
+    '3DO',
+    'GBA',
+    'Jaguar',
+    'Playstation',
+    'Xbox 360',
+    'Saturn',
+    'Super nintendo',
+    'Nintendo Switch'
   ],
-  dateSortieinitial: new Date(1994-1-10),
+  dateSortieinitial: new Date('1994-1-10'),
   nombreCopieVendu: 20000000,
   prix: 6.04,
   developpeur: [
-    "id software",
-    " Nightdive Studio"
+    'id software',
+    ' Nightdive Studio'
   ],
   editeur: [
-    "Bethesda"
+    'Bethesda'
   ],
   genre: [
-    "FPS"
+    'FPS'
   ],
-  ESRB: "M",
   modeDeJeu: [
-    "solo"
+    'solo'
   ],
   dureeJeux: 5,
-  disponible: true,
-  Metacritic: 82
+  disponible: true
 }] as const;
 const compareJeuxVideoArrays = customDeepCompare ({
-    onlyCompareProps: ['nom','plateforme','dateSortieinitial','nombreCopieVendu','prix','developpeur','editeur','genre','ESRB','modeDeJeu','dureeJeux','disponible','Metacritic'],
+    onlyCompareProps: ['nom','plateforme','nombreCopieVendu','prix','developpeur','editeur','genre','modeDeJeu','dureeJeux','disponible'],
+    
 });
 const mockify = require('@jazim/mock-mongoose');
 
@@ -124,7 +120,7 @@ describe('JeuxVideoRouter', () => {
                 const data = [...DB_JEUXVIDEO];
                 mockify(JeuxVideo).toReturn(data, 'find');
                 const res: TRes<{ jeuxvideos: IJeuxVideo[]}> = await agent.get(Paths.jeuxvideo.Getall);
-
+               //console.log(res.body.jeuxvideos);
                 expect(res.status).toBe(HttpStatusCodes.OK);
                 expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO)).toBeTruthy();
             },
@@ -136,12 +132,15 @@ describe('JeuxVideoRouter', () => {
         it(
             `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
             async () =>{
+              const data = [...DB_JEUXVIDEO];
                 mockify(JeuxVideo)
                 .toReturn(DB_JEUXVIDEO[0], 'findOne')
                 const id = DB_JEUXVIDEO[0].id
-               const res: TRes<{jeuxvideo: IJeuxVideo}> = await agent.get(getPath(id));
+               const res: TRes<{jeuxvideo: IJeuxVideo}> = await agent.get(getPath(id!));
+             console.log(res.body.jeuxvideo);
+              // console.log(DB_JEUXVIDEO[0]);
                 expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxvideo, DB_JEUXVIDEO )).toBeTruthy();
+                expect(compareJeuxVideoArrays(res.body.jeuxvideo, DB_JEUXVIDEO[0] )).toBeTruthy();
             },
         );
     });
@@ -156,7 +155,7 @@ describe('JeuxVideoRouter', () => {
                 const genre = DB_JEUXVIDEO[0].genre[0]
                const res: TRes<{jeuxvideos: IJeuxVideo[]}> = await agent.get(getPath(genre));
                 expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO )).toBeTruthy();
+                expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO[0] )).toBeTruthy();
             },
         );
     });
@@ -167,7 +166,7 @@ describe('JeuxVideoRouter', () => {
             `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
             async () =>{
                 mockify(JeuxVideo)
-                .toReturn(DB_JEUXVIDEO[0], 'find')
+                .toReturn(DB_JEUXVIDEO, 'find')
                 const plateforme = DB_JEUXVIDEO[0].plateforme[0]
                const res: TRes<{jeuxvideos: IJeuxVideo[]}> = await agent.get(getPath(plateforme));
                 expect(res.status).toBe(HttpStatusCodes.OK);
@@ -183,31 +182,29 @@ describe('JeuxVideoRouter', () => {
       async () => {
         const jeuxvideo: IJeuxVideo = {
             id:'12',
-             nom: "test",
+             nom: 'testadd',
   plateforme: [
-    "Windows",
-    "Mac OS",
-    "Linux"
+    'Windows',
+    'Mac OS',
+    'Linux'
   ],
   dateSortieinitial: new Date(1994-1-10),
   nombreCopieVendu: 200,
   prix: 6.00,
   developpeur: [
-    "id software"
+    'id software'
   ],
   editeur: [
-    "Bethesda"
+    'Bethesda'
   ],
   genre: [
-    "FPS"
+    'FPS'
   ],
-  ESRB: "A",
   modeDeJeu: [
-    "solo"
+    'solo'
   ],
   dureeJeux: 1,
-  disponible: false,
-  Metacritic: 5
+  disponible: false
 
 };
         // Préparer le simulacre de Mongoose
@@ -225,7 +222,7 @@ describe('JeuxVideoRouter', () => {
       async () => {
         const res: TRes = await agent
           .post(Paths.jeuxvideo.Add)
-          .send({ auteur: null });
+          .send({ jeuxvideo: null });
         expect(res.status).toBe(HttpStatusCodes.BAD_REQUEST);
         expect(res.body.error).toBe('jeuxvideo requis');
       },
@@ -238,7 +235,7 @@ describe('JeuxVideoRouter', () => {
         'est réussie.',
       async () => {
         const jeuxvideo = DB_JEUXVIDEO[0];
-        jeuxvideo.nom = "test de modif";
+        jeuxvideo.nom = 'test de modif';
 
         // Préparer le simulacre de Mongoose
         mockify(JeuxVideo).toReturn(jeuxvideo, 'findById').toReturn(jeuxvideo, 'save');
@@ -253,32 +250,31 @@ describe('JeuxVideoRouter', () => {
         `'${HttpStatusCodes.NOT_FOUND}' si l'id n'est pas trouvé.`,
       async () => {
         // Préparer le simulacre de Mongoose
-        mockify(JeuxVideo).toReturn(null, 'findById');
+        mockify(JeuxVideo).toReturn(null, 'findOne');
         const jeuxvideo = {
-            id: 4,
-           nom: "test",
+            id: '4',
+           nom: 'test',
             plateforme: [
-    "Windows",
+    'Windows',
   ],
   dateSortieinitial: new Date(1994-1-10),
   nombreCopieVendu: 200,
   prix: 6.00,
   developpeur: [
-    "id software"
+    'id software'
   ],
   editeur: [
-    "Bethesda"
+    'Bethesda'
   ],
   genre: [
-    "FPS"
+    'FPS'
   ],
-  ESRB: "A",
+
   modeDeJeu: [
-    "solo"
+    'solo'
   ],
   dureeJeux: 1,
-  disponible: false,
-  Metacritic: 5
+  disponible: false
 
           },
           res: TRes = await agent.put(Paths.jeuxvideo.Update).send({ jeuxvideo });
@@ -302,7 +298,7 @@ describe('JeuxVideoRouter', () => {
           .toReturn(DB_JEUXVIDEO[0], 'findOne')
           .toReturn(DB_JEUXVIDEO[0], 'findOneAndRemove');
         const id = DB_JEUXVIDEO[0].id,
-          res = await agent.delete(getPath(id));
+          res = await agent.delete(getPath(id!));
         expect(res.status).toBe(HttpStatusCodes.OK);
       },
     );

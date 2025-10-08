@@ -32,28 +32,22 @@ async function getPlatforme(req: IReq, res:IRes) {
 async function add(req: IReq, res: IRes) {
   const { jeuxvideo } = req.body;
   await JeuxVideoService.addOne(jeuxvideo as IJeuxVideo);
-  res.status(HttpStatusCodes.CREATED).json({
-    "Message":"le jeux a été ajouter"
-  });
+  res.status(HttpStatusCodes.CREATED).end();
+  
 }
 
 
 async function update(req: IReq, res: IRes) {
   const { jeuxvideo } = req.body;
   await JeuxVideoService.updateOne(jeuxvideo as IJeuxVideo);
-  res.status(HttpStatusCodes.OK).json({
-    "message":"le jeux vidéo a été modifier"
-  });
+  res.status(HttpStatusCodes.OK).end();
 }
 
 
 async function delete_(req: IReq, res: IRes) {
   const { id } = req.params;
   await JeuxVideoService.delete(id as string);
-  res.status(HttpStatusCodes.OK).json({
-    "message":"le jeux a été supprimer",
-    "id jeux supprimer": id
-  });
+  res.status(HttpStatusCodes.OK).end();
 }
 
 /******************************************************************************

@@ -18,7 +18,7 @@ import mongoose, { model, Schema } from 'mongoose';
 ******************************************************************************/
 
 export interface IJeuxVideo {
-  id: string;
+  id?: string;
   nom: string;
   plateforme: string[];
   dateSortieinitial:Date;

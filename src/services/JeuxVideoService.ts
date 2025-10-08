@@ -36,7 +36,7 @@ function addOne(jeuxvideo: IJeuxVideo): Promise<void> {
 
 
 async function updateOne(jeuxvideo:IJeuxVideo): Promise<void> {
- const persists = await JeuxVideoRepo.getOne(jeuxvideo.id);
+ const persists = await JeuxVideoRepo.getOne(jeuxvideo.id!);
  if(!persists){
   throw new RouteError(HttpStatusCodes.NOT_FOUND, JEUXVIDEO_NON_TROUVE);
  }
