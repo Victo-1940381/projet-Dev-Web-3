@@ -1,0 +1,101 @@
+openapi: '3.1.0'
+info:
+  title: "JeuxVidéo"
+  description: "mon Api sur les jeux Jeux Vidéos"
+  version: "1"
+servers: 
+  - url: "http://localhost:3000/"
+    description: "serveur de devloppement"
+paths: 
+  /api/jeuxvideo/liste:
+    get:
+      parameters: []
+      responses: 
+        "200":
+          description: "liste de tous les jeux vidéos"
+          content: 
+            application/json:
+              schema:
+                required:
+                - "jeuxvideos"
+                type: "object"
+                properties:
+                    jeuxvideos:
+                      type: "array"
+                      items:
+                        required:
+                        - "_id"
+                        - "nom"
+                        - "plateforme"
+                        - "dateSortieinitial"
+                        - "nombreCopieVendu"
+                        - "prix"
+                        - "developpeur"
+                        - "editeur"
+                        - "genre" 
+                        - "modeDeJeu"
+                        - "dureeJeux"
+                        - "disponible"
+                        type: "object"
+                        properties:
+                            _id:
+                             type: "string"
+                            nom:
+                              type: "string"
+                            plateforme:
+                                type: "array"
+                                items:
+                                  type: "string"
+                            dateSortieinitial:
+                              type: "string"
+                            nombreCopieVendu:
+                              type: "number"
+                            prix:
+                              type: "number"
+                            developpeur:
+                              type: "array"
+                              items:
+                                type: "string"
+                            editeur:
+                              type: "array"
+                              items:
+                                type: "string"
+                            genre:
+                              type: "array"
+                              items:
+                                type: "string"
+                            ESRB:
+                              type: "string"
+                            modeDeJeu:
+                              type: "array"
+                              items:
+                                type: "string"
+                            dureeJeux:
+                              type: "number"
+                            disponible:
+                              type: "boolean"
+                            Metacritic:
+                              type: "number"
+  /api/jeuxvideo/{id}:
+    get:
+      parameters:
+        - in: path
+          name: "id"
+          schema: 
+            type: "string"
+          required: true
+          description: "l'id du jeux vidéo"
+  
+
+
+
+
+
+
+
+
+
+          
+                                 
+
+        
