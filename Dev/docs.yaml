@@ -85,6 +85,73 @@ paths:
             type: "string"
           required: true
           description: "l'id du jeux vidéo"
+      responses: 
+        "200":
+            description: " affiche le jeux vidéo avec l'id en paramètre"
+            content: 
+              application/json:
+                schema:
+                  required:
+                  - "jeuxvideo"
+                  type: "object"
+                  properties:
+                    jeuxvideo:
+                      type: "object"
+                      properties:
+                          _id:
+                            type: "string"
+                          nom:
+                            type: "string"
+                          plateforme:
+                            type: "array"
+                            items:
+                              type: "string"
+                          dateSortieinitial:
+                            type: "string"
+                          nombreCopieVendu:
+                            type: "number"
+                          prix:
+                            type: "number"
+                          developpeur:
+                            type: "array"
+                            items:
+                              type: "string"
+                          editeur:
+                            type: "array"
+                            items:
+                              type: "string"
+                          genre:
+                            type: "array"
+                            items:
+                              type: "string"
+                          ESRB:
+                            type: "string"
+                          modeDeJeu:
+                            type: "array"
+                            items:
+                              type: "string"
+                          dureeJeux:
+                            type: "number"
+                          disponible:
+                            type: "boolean"
+                          Metacritic:
+                            type: "number"
+        "404": 
+          description: " jeux non trouvé avec l'id en paramètre"
+          content: 
+              application/json:
+                schema:
+                  required:
+                  - "jeuxvideo"
+                  type: "object"
+                  properties: 
+                      jeuxvideo:
+                        type: "null"
+
+                  
+
+
+
   
 
 

@@ -16,7 +16,11 @@ async function getAll(_: IReq, res: IRes) {
 async function getOne(req: IReq, res:IRes) {
     const { id } = req.params;
    const jeuxvideo= await JeuxVideoService.getOne(id as string);
+   if (jeuxvideo == null){
+    res.status (HttpStatusCodes.NOT_FOUND).json({ jeuxvideo})
+   } else{
     res.status (HttpStatusCodes.OK).json({ jeuxvideo });
+   }
 }
 async function getGenre(req: IReq, res:IRes) {
     const { genre } = req.params;
