@@ -1,9 +1,7 @@
 import { isString } from 'jet-validators';
 import { parseObject, TParseOnError } from 'jet-validators/utils';
 
-import { isRelationalKey, transIsDate } from '@src/common/util/validators';
-import { IModel } from './common/types';
-import { platform } from 'os';
+
 import mongoose, { model, Schema } from 'mongoose';
 
 

@@ -147,6 +147,21 @@ paths:
                   properties: 
                       jeuxvideo:
                         type: "null"
+  /api/genre/{genre}:
+    get:
+      parameters: 
+        - in: path
+          name: "genre"
+          schema: 
+            type: "string"
+          required: true
+          description: "le genre du jeux vidéo"
+      responses:
+        "200":
+          description: "affiche les jeux en fonction du genre passé en paramètre"
+
+
+
 
                   
 

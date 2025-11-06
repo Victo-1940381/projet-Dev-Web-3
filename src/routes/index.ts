@@ -6,7 +6,8 @@ import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import { error } from 'console';
 import { JeuxVideo } from '@src/models/JeuxVideo';
 
-
+import UserRoutes from './UserRoutes';
+import JetonRoutes from './JetonRoutes';
 /******************************************************************************
                                 Setup
 ******************************************************************************/
@@ -37,7 +38,11 @@ function validateJeuxVideo (req:Request,res:Response,next:NextFunction){
     }
 }
 // ** Add JeuxVideoRouter ** //
+const tokenRouter = Router();
+tokenRouter.get(Paths.GenerateToken.Get, JetonRoutes.generateToken);
 
+// ** Add tokenRouter ** //
+apiRouter.use(Paths.GenerateToken.Base, tokenRouter);
 // Init router
 const JeuxVideoRouter = Router();
 
@@ -50,9 +55,19 @@ JeuxVideoRouter.post(Paths.jeuxvideo.Add,validateJeuxVideo, JeuxVideoRoute.add);
 JeuxVideoRouter.put(Paths.jeuxvideo.Update,validateJeuxVideo, JeuxVideoRoute.update);
 JeuxVideoRouter.delete(Paths.jeuxvideo.Delete, JeuxVideoRoute.delete);
 
+
+const userRouter = Router();
+
+// Get all users
+userRouter.get(Paths.Users.Get, UserRoutes.getAll);
+userRouter.post(Paths.Users.Add, UserRoutes.add);
+userRouter.put(Paths.Users.Update, UserRoutes.update);
+userRouter.delete(Paths.Users.Delete, UserRoutes.delete);
+
+
 // Add JeuxVideoRouter
 apiRouter.use(Paths.jeuxvideo.Base, JeuxVideoRouter);
-
+apiRouter.use(Paths.Users.Base, userRouter);
 
 /******************************************************************************
                                 Export default

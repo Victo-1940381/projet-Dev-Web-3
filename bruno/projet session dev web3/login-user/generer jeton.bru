@@ -1,0 +1,29 @@
+meta {
+  name: generer jeton
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/api/generatetoken
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "userLogin":{
+      "email":"ludovicpl@example.com",
+      "password":"lulu2000"
+    }
+  }
+}
+
+script:post-response {
+  bru.setEnvVar("jwttoken", res.body.token)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

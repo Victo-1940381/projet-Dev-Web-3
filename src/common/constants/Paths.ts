@@ -11,4 +11,15 @@ export default {
     Update: '/modifier',
     Delete: '/supprimer/:id',
   },
+   GenerateToken: {
+    Base: '/generatetoken',
+    Get: '/',
+  },
+  Users: {
+    Base: '/users',
+    Get: '/all',
+    Add: '/add',
+    Update: '/update',
+    Delete: '/delete/:id',
+  },
 } as const;
