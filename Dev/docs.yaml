@@ -8,38 +8,40 @@ servers:
     description: "serveur de devloppement"
 paths: 
   /api/jeuxvideo/liste:
-    get:
-      parameters: []
-      responses: 
-        "200":
-          description: "liste de tous les jeux vidéos"
-          content: 
-            application/json:
-              schema:
-                required:
-                - "jeuxvideos"
-                type: "object"
-                properties:
-                    jeuxvideos:
-                      type: "array"
-                      items:
-                        required:
-                        - "_id"
-                        - "nom"
-                        - "plateforme"
-                        - "dateSortieinitial"
-                        - "nombreCopieVendu"
-                        - "prix"
-                        - "developpeur"
-                        - "editeur"
-                        - "genre" 
-                        - "modeDeJeu"
-                        - "dureeJeux"
-                        - "disponible"
-                        type: "object"
-                        properties:
+      get:
+        parameters: []
+        tags: 
+        - "jeuxvideo"
+        responses: 
+          "200":
+            description: "liste de tous les jeux vidéos"
+            content: 
+              application/json:
+                schema:
+                  required:
+                  - "jeuxvideos"
+                  type: "object"
+                  properties:
+                      jeuxvideos:
+                        type: "array"
+                        items:
+                          required:
+                          - "_id"
+                          - "nom"
+                          - "plateforme"
+                          - "dateSortieinitial"
+                          - "nombreCopieVendu"
+                          - "prix"
+                          - "developpeur"
+                          - "editeur"
+                          - "genre" 
+                          - "modeDeJeu"
+                          - "dureeJeux"
+                          - "disponible"
+                          type: "object"
+                          properties:
                             _id:
-                             type: "string"
+                              type: "string"
                             nom:
                               type: "string"
                             plateforme:
@@ -85,6 +87,8 @@ paths:
             type: "string"
           required: true
           description: "l'id du jeux vidéo"
+      tags: 
+       - "jeuxvideo"
       responses: 
         "200":
             description: " affiche le jeux vidéo avec l'id en paramètre"
@@ -156,9 +160,265 @@ paths:
             type: "string"
           required: true
           description: "le genre du jeux vidéo"
+      tags: 
+        - "jeuxvideo"
       responses:
         "200":
           description: "affiche les jeux en fonction du genre passé en paramètre"
+          content:
+            application/json: 
+              schema: 
+                  required: 
+                  - "jeuxvideos"
+                  type: "object"
+                  properties:
+                     jeuxvideos:
+                      type: "array"
+                      items:
+                        required:
+                        - "_id"
+                        - "nom"
+                        - "plateforme"
+                        - "dateSortieinitial"
+                        - "nombreCopieVendu"
+                        - "prix"
+                        - "developpeur"
+                        - "editeur"
+                        - "genre" 
+                        - "modeDeJeu"
+                        - "dureeJeux"
+                        - "disponible"
+                        type: "object"
+                        properties:
+                            _id:
+                             type: "string"
+                            nom:
+                              type: "string"
+                            plateforme:
+                                type: "array"
+                                items:
+                                  type: "string"
+                            dateSortieinitial:
+                              type: "string"
+                            nombreCopieVendu:
+                              type: "number"
+                            prix:
+                              type: "number"
+                            developpeur:
+                              type: "array"
+                              items:
+                                type: "string"
+                            editeur:
+                              type: "array"
+                              items:
+                                type: "string"
+                            genre:
+                              type: "array"
+                              items:
+                                type: "string"
+                            ESRB:
+                              type: "string"
+                            modeDeJeu:
+                              type: "array"
+                              items:
+                                type: "string"
+                            dureeJeux:
+                              type: "number"
+                            disponible:
+                              type: "boolean"
+                            Metacritic:
+                              type: "number"
+        "404":
+         description: "aucun jeux trouver avec le paramètre genre"
+         content: 
+           application/json: 
+             schema: 
+                 required: 
+                 - "jeuxvideo"
+                 type: "object"
+                 properties: 
+                   jeuxvideo:
+                    type: "array"
+  "/api/jeuxvideo/plateforme/{plateforme}":
+     get:
+      parameters: 
+        - in: path
+          name: "plateforme"
+          schema: 
+            type: "string"
+          required: true
+          description: "la plateforme du jeux vidéo"
+      tags: 
+        - "jeuxvideo"
+      responses:
+        "200":
+          description: "affiche les jeux en fonction de la plateforme passé en paramètre"
+          content:
+            application/json:
+              schema: 
+                  required: 
+                  - "jeuxvideos"
+                  type: "object"
+                  properties:
+                     jeuxvideos:
+                      type: "array"
+                      items:
+                        required:
+                        - "_id"
+                        - "nom"
+                        - "plateforme"
+                        - "dateSortieinitial"
+                        - "nombreCopieVendu"
+                        - "prix"
+                        - "developpeur"
+                        - "editeur"
+                        - "genre" 
+                        - "modeDeJeu"
+                        - "dureeJeux"
+                        - "disponible"
+                        type: "object"
+                        properties:
+                            _id:
+                              type: "string"
+                            nom:
+                              type: "string"
+                            plateforme:
+                                type: "array"
+                                items:
+                                  type: "string"
+                            dateSortieinitial:
+                              type: "string"
+                            nombreCopieVendu:
+                              type: "number"
+                            prix:
+                              type: "number"
+                            developpeur:
+                              type: "array"
+                              items:
+                                type: "string"
+                            editeur:
+                              type: "array"
+                              items:
+                                type: "string"
+                            genre:
+                              type: "array"
+                              items:
+                                type: "string"
+                            ESRB:
+                              type: "string"
+                            modeDeJeu:
+                              type: "array"
+                              items:
+                                type: "string"
+                            dureeJeux:
+                              type: "number"
+                            disponible:
+                              type: "boolean"
+                            Metacritic:
+                              type: "number"
+        "404":
+          description: "aucun jeux trouver avec le paramètre plateforme"
+          content: 
+           application/json: 
+             schema: 
+                 required: 
+                 - "jeuxvideo"
+                 type: "object"
+                 properties: 
+                   jeuxvideo:
+                    type: "array"
+  "/api/jeuxvideo/ajouter":
+    post: 
+      description: "ajoute un jeux avec les information du jeux passé dans le corps de la requete"
+      tags: 
+        - "jeuxvideo"
+      requestBody: 
+        content: 
+          application/json: 
+            schema: 
+              required: 
+                - "jeuxvideo"
+              type: "object"
+              properties: 
+                jeuxvideo:
+                      type: "object"
+                      properties:
+                          nom:
+                            type: "string"
+                          plateforme:
+                            type: "array"
+                            items:
+                              type: "string"
+                          dateSortieinitial:
+                            type: "string"
+                          nombreCopieVendu:
+                            type: "number"
+                          prix:
+                            type: "number"
+                          developpeur:
+                            type: "array"
+                            items:
+                              type: "string"
+                          editeur:
+                            type: "array"
+                            items:
+                              type: "string"
+                          genre:
+                            type: "array"
+                            items:
+                              type: "string"
+                          ESRB:
+                            type: "string"
+                          modeDeJeu:
+                            type: "array"
+                            items:
+                              type: "string"
+                          dureeJeux:
+                            type: "number"
+                          disponible:
+                            type: "boolean"
+                          Metacritic:
+                            type: "number"
+      responses: 
+        "200":
+          description: "le jeux est ajouter a la base de donnée"
+          content:
+            application/json:
+              schema:
+                required: 
+                  - "message"
+                type: "object"
+                properties:
+                    message:
+                      type: "string"
+components: 
+  schemas:
+    disponible:
+      type: "object"
+      properties: 
+        name:
+          type: "string"
+        message:
+          type: "string"
+        "properties":
+          type: "object"
+          properties: 
+            
+
+
+        
+
+
+                
+                
+
+
+
+
+              
+
+
+
 
 
 

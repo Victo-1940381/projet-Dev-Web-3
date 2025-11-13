@@ -17,7 +17,7 @@ async function getOne(req: IReq, res:IRes) {
     const { id } = req.params;
    const jeuxvideo= await JeuxVideoService.getOne(id as string);
    if (jeuxvideo == null){
-    res.status (HttpStatusCodes.NOT_FOUND).json({ jeuxvideo})
+    res.status (HttpStatusCodes.NOT_FOUND).json({ jeuxvideo});
    } else{
     res.status (HttpStatusCodes.OK).json({ jeuxvideo });
    }
@@ -25,18 +25,27 @@ async function getOne(req: IReq, res:IRes) {
 async function getGenre(req: IReq, res:IRes) {
     const { genre } = req.params;
     const jeuxvideos = await JeuxVideoService.getGenre(genre as string);
-    res.status (HttpStatusCodes.OK).json({jeuxvideos});
+    if (jeuxvideos.length ===0){
+      res.status (HttpStatusCodes.NOT_FOUND).json({jeuxvideos});
+    } else{
+      res.status (HttpStatusCodes.OK).json({jeuxvideos});
+    }
+    
 }
 async function getPlatforme(req: IReq, res:IRes) {
     const { plateforme } = req.params;
     const jeuxvideos = await JeuxVideoService.getPlatforme(plateforme as string);
-    res.status(HttpStatusCodes.OK).json({jeuxvideos});
+    if (jeuxvideos.length ===0){
+      res.status (HttpStatusCodes.NOT_FOUND).json({jeuxvideos});
+    } else{
+      res.status (HttpStatusCodes.OK).json({jeuxvideos});
+    }
 }
 
 async function add(req: IReq, res: IRes) {
   const { jeuxvideo } = req.body;
   await JeuxVideoService.addOne(jeuxvideo as IJeuxVideo);
-  res.status(HttpStatusCodes.CREATED).end();
+  res.status(HttpStatusCodes.CREATED).json({"message":"le jeux a été ajouter"});
   
 }
 
