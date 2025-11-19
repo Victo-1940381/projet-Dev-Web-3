@@ -7,13 +7,17 @@ meta {
 put {
   url: http://localhost:3000/api/jeuxvideo/modifier
   body: json
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
 }
 
 body:json {
   {
-    "jeuxvideo": {
-        "id": "68e665427637bc7d024d1253",
+    "jeuxwvideo": {
+        "id": "68e3f4b93ba349484db357b2",
        "nom": "Legend of Zelda Breath of the Wild",
         "plateforme": [
           "Nintendo Switch",

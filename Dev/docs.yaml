@@ -12,6 +12,9 @@ paths:
         parameters: []
         tags: 
         - "jeuxvideo"
+        security:
+        - bearerAuth:
+            bea
         responses: 
           "200":
             description: "liste de tous les jeux vidéos"
@@ -78,6 +81,9 @@ paths:
                               type: "boolean"
                             Metacritic:
                               type: "number"
+          "401":
+            $ref: '#/components/responses/UnauthorizedError'
+
   /api/jeuxvideo/{id}:
     get:
       parameters:
@@ -89,6 +95,8 @@ paths:
           description: "l'id du jeux vidéo"
       tags: 
        - "jeuxvideo"
+      security:
+        - bearerAuth: []
       responses: 
         "200":
             description: " affiche le jeux vidéo avec l'id en paramètre"
@@ -151,6 +159,8 @@ paths:
                   properties: 
                       jeuxvideo:
                         type: "null"
+        "401":
+              $ref: '#/components/responses/UnauthorizedError'
   /api/genre/{genre}:
     get:
       parameters: 
@@ -162,6 +172,8 @@ paths:
           description: "le genre du jeux vidéo"
       tags: 
         - "jeuxvideo"
+      security:
+        - bearerAuth: []
       responses:
         "200":
           description: "affiche les jeux en fonction du genre passé en paramètre"
@@ -239,6 +251,8 @@ paths:
                  properties: 
                    jeuxvideo:
                     type: "array"
+        "401":
+            $ref: '#/components/responses/UnauthorizedError'
   "/api/jeuxvideo/plateforme/{plateforme}":
      get:
       parameters: 
@@ -250,6 +264,8 @@ paths:
           description: "la plateforme du jeux vidéo"
       tags: 
         - "jeuxvideo"
+      security:
+        - bearerAuth: []
       responses:
         "200":
           description: "affiche les jeux en fonction de la plateforme passé en paramètre"
@@ -327,11 +343,15 @@ paths:
                  properties: 
                    jeuxvideo:
                     type: "array"
+        "401":
+            $ref: '#/components/responses/UnauthorizedError'
   "/api/jeuxvideo/ajouter":
     post: 
       description: "ajoute un jeux avec les information du jeux passé dans le corps de la requete"
       tags: 
         - "jeuxvideo"
+      security:
+        - bearerAuth: []
       requestBody: 
         content: 
           application/json: 
@@ -418,6 +438,196 @@ paths:
                     type: "string" 
                   message:
                     type: "string"
+        "401":
+            $ref: '#/components/responses/UnauthorizedError'
+  "/api/jeuxvideo/modifier":
+    put:
+      description: "modifie le jeux avec les paramètre passé dans le corps de la requete"
+      tags: 
+        - "jeuxvideo"
+      security:
+        - bearerAuth: []
+      requestBody: 
+        content: 
+          application/json: 
+            schema: 
+              required: 
+                - "jeuxvideo"
+              type: "object"
+              properties: 
+                jeuxvideo:
+                      type: "object"
+                      properties:
+                          id:
+                            type: "string" 
+                          nom:
+                            type: "string"
+                          plateforme:
+                            type: "array"
+                            items:
+                              type: "string"
+                          dateSortieinitial:
+                            type: "string"
+                          nombreCopieVendu:
+                            type: "number"
+                          prix:
+                            type: "number"
+                          developpeur:
+                            type: "array"
+                            items:
+                              type: "string"
+                          editeur:
+                            type: "array"
+                            items:
+                              type: "string"
+                          genre:
+                            type: "array"
+                            items:
+                              type: "string"
+                          ESRB:
+                            type: "string"
+                          modeDeJeu:
+                            type: "array"
+                            items:
+                              type: "string"
+                          dureeJeux:
+                            type: "number"
+                          disponible:
+                            type: "boolean"
+                          Metacritic:
+                            type: "number"
+      responses:
+        "200":
+          description: "le jeux a été modifier"
+          content:
+            application/json:
+              schema:
+                required: 
+                  - "message"
+                type: "object"
+                properties:
+                    message:
+                      type: "string"
+        "401":
+            $ref: '#/components/responses/UnauthorizedError'
+        "400":
+          description: "paramètre manquant"
+          content:
+            application/json:
+              schema:
+                required: 
+                  - "errors"
+                  - "_message"
+                  - "name"
+                  - "message"
+                type: "object"
+                properties: 
+                  errors:
+                    anyOf: 
+                      - $ref: '#/components/schemas/disponible'
+                      - $ref: '#/components/schemas/dureeJeux'
+                      - $ref: '#/components/schemas/prix'
+                      - $ref: '#/components/schemas/nombreCopieVendu'
+                      - $ref: '#/components/schemas/dateSortieinitial'
+                      - $ref: '#/components/schemas/nom'
+                      - $ref: '#/components/schemas/platforme'
+                  _message:
+                    type: "string"
+                  name:
+                    type: "string" 
+                  message:
+                    type: "string"
+        "404": 
+          description: " jeux non trouvé avec l'id dans le corps"
+          content: 
+              application/json:
+                schema:
+                  required:
+                  - "error"
+                  type: "object"
+                  properties: 
+                      error:
+                        type: "string"
+  "/api/jeuxvideo/delete/{id}":
+    delete:
+      description: "supprime un jeux vidéo avec l'id passé en paramètre"
+      tags: 
+        - "jeuxvideo"
+      security:
+        - bearerAuth: []
+      parameters: 
+        - in: path
+          name: "id"
+          schema: 
+            type: "string"
+          required: true
+          description: "l'id du jeux vidéo"      
+      responses:
+        "200":
+          description: "jeux supprimer avec l'id "
+          content:
+             application/json:
+              schema:
+                required: 
+                  - "message"
+                type: "object"
+                properties:
+                    message:
+                      type: "string"
+        "401":
+            $ref: '#/components/responses/UnauthorizedError'
+        "404": 
+          description: " jeux non trouvé avec l'id passée en paramètre"
+          content: 
+              application/json:
+                schema:
+                  required:
+                  - "error"
+                  type: "object"
+                  properties: 
+                      error:
+                        type: "string"
+  "/api/generatetoken":
+      get:
+        description: "génère un token d'autentification pour les route"
+        tags: 
+         - "Gestion token"
+        requestBody: 
+          content: 
+            application/json: 
+              schema:
+                required:
+                  - "userLogin"
+                type: "object"
+                properties:
+                  userLogin:
+                    type: "object"
+                    properties:
+                        email:
+                          type: "string"
+                        password: 
+                          type: "string"
+        responses:
+          "200":
+            description: "l'utilisateur est trouvé et genere le token"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    token:
+                      type: "string"
+          "404":
+            description: "l'utilisateur n'est pas trouvé"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    message:
+                      type: "string"
+                
+
 
 
 components: 
@@ -587,6 +797,19 @@ components:
                 type: "string"
             value:
                 type: "array"
+  securitySchemes:
+    bearerAuth: # 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT `
+  responses:
+    UnauthorizedError:
+      description: le token est invalide ou manquant
+      content:
+        "text/plain":
+          schema:
+            type: string
+            example: Unauthorized
     
 
             

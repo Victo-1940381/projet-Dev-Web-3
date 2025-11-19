@@ -7,11 +7,15 @@ meta {
 delete {
   url: http://localhost:3000/api/jeuxvideo/supprimer/:id
   body: none
-  auth: inherit
+  auth: bearer
 }
 
 params:path {
-  id: 68e66c9ceb8a5edcb866feab
+  id: 691e01525735dec7b39ab3e1
+}
+
+auth:bearer {
+  token: {{token}}
 }
 
 settings {

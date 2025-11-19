@@ -7,13 +7,18 @@ meta {
 get {
   url: http://localhost:3000/api/jeuxvideo/:id
   body: none
-  auth: inherit
+  auth: bearer
 }
 
 params:path {
-  id: 68d57bed9458d8096468aa45
+  id: 6916349e25f4dea50e90b90d
+}
+
+auth:bearer {
+  token: {{token}}
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

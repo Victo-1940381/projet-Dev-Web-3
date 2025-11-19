@@ -10,7 +10,11 @@ import { error } from 'console';
 
 
 async function getOne(id: string): Promise<IJeuxVideo | null> {
- const jeuxvideo = await JeuxVideo.findById(id);
+  let jeuxvideo = null;
+  if (mongoose.Types.ObjectId.isValid(id)){
+      jeuxvideo = await JeuxVideo.findById(id);
+  }
+  
  return jeuxvideo;
 }
 async function getPlatforme(plateforme: string) : Promise<IJeuxVideo[]> {
