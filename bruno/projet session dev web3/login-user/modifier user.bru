@@ -1,0 +1,32 @@
+meta {
+  name: modifier user
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/api/users/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "user":{
+      "id":37483959170,
+      "name":"delete test",
+      "email":"234567@fgbvfds",
+      "password":"44665533",
+      "created": "{{$isoTimestamp}}"
+    }
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

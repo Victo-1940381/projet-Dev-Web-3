@@ -391,18 +391,204 @@ paths:
                 properties:
                     message:
                       type: "string"
+        "400":
+          description: "paramètre manquant"
+          content:
+            application/json:
+              schema:
+                required: 
+                  - "errors"
+                  - "_message"
+                  - "name"
+                  - "message"
+                type: "object"
+                properties: 
+                  errors:
+                    anyOf: 
+                      - $ref: '#/components/schemas/disponible'
+                      - $ref: '#/components/schemas/dureeJeux'
+                      - $ref: '#/components/schemas/prix'
+                      - $ref: '#/components/schemas/nombreCopieVendu'
+                      - $ref: '#/components/schemas/dateSortieinitial'
+                      - $ref: '#/components/schemas/nom'
+                      - $ref: '#/components/schemas/platforme'
+                  _message:
+                    type: "string"
+                  name:
+                    type: "string" 
+                  message:
+                    type: "string"
+
+
 components: 
   schemas:
     disponible:
       type: "object"
-      properties: 
-        name:
-          type: "string"
-        message:
-          type: "string"
-        "properties":
+      properties:
+        disponible:
           type: "object"
           properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+    dureeJeux:
+      type: "object"
+      properties:
+        dureeJeux:
+          type: "object"
+          properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+    prix:
+      type: "object"
+      properties:
+        prix:
+          type: "object"
+          properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+    nombreCopieVendu:
+      type: "object"
+      properties:
+        nombreCopieVendu:
+          type: "object"
+          properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+    dateSortieinitial:
+      type: "object"
+      properties:
+        dateSortieinitial:
+          type: "object"
+          properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+    nom:
+      type: "object"
+      properties:
+        nom:
+          type: "object"
+          properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+    platforme:
+      type: "object"
+      properties:
+        platforme:
+          type: "object"
+          properties: 
+            name:
+              type: "string"
+            message:
+              type: "string"
+            "properties":
+              type: "object"
+              properties: 
+                message:
+                  type: "string"
+                type:
+                  type: "string"
+                path:
+                  type: "string"
+                value: 
+                  type: "array"
+            kind:
+              type: "string"
+            path:
+                type: "string"
+            value:
+                type: "array"
+    
+
             
 
 

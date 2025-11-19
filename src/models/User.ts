@@ -39,6 +39,7 @@ const parseUser = parseObject<IUser>({
   created: transIsDate,
 });
 
+
 // Initialize the "parseUserLogin" function
 const parseUserLogin = parseObject<IUserLogin>({
   email: isString,
@@ -72,6 +73,7 @@ function test(arg: unknown, errCb?: TParseOnError): arg is IUser {
 function testlogin(arg: unknown, errCb?: TParseOnError): arg is IUserLogin {
   return !!parseUserLogin(arg, errCb);
 }
+
 
 /******************************************************************************
                                 Export default

@@ -11,7 +11,19 @@ post {
 }
 
 auth:bearer {
-  token: eyJhbGciOiJIUzI1NiJ9.bHVkb3ZpY3BsQGV4YW1wbGUuY29t.4z3dxtfK2Y9ENfWHoXTnb6CekpEGUJFrPAzUNM1gg4o
+  token: {{token}}
+}
+
+body:json {
+  {
+    "user": {
+      "id":-1,
+      "name": "test delete",
+      "email": "testdelete@hotmail.com",
+      "password": "1234567890",
+      "created": "{{$isoTimestamp}}"
+    }
+  }
 }
 
 settings {

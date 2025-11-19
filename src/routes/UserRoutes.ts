@@ -7,6 +7,7 @@ import User from '@src/models/User';
 
 import { IReq, IRes } from './common/types';
 import { parseReq } from './common/util';
+import { getRandomInt } from '@src/common/util/misc';
 
 
 /******************************************************************************

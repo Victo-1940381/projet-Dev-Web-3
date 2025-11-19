@@ -7,12 +7,16 @@ meta {
 post {
   url: http://localhost:3000/api/jeuxvideo/ajouter
   body: json
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
 }
 
 body:json {
   {
-    "jeuxvideo":{
+    "jeuxvidseo":{
         "nom": "Legend of Zelda Breath of the Wild",
         "plateforme": [
          "Nintendo Switch",
