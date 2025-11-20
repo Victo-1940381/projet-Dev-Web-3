@@ -9,7 +9,7 @@ import { IUser } from '@src/models/User';
                                 Constants
 ******************************************************************************/
 
-export const USER_NOT_FOUND_ERR = 'User not found';
+export const USER_NOT_FOUND_ERR = 'User pas trouvée';
 
 
 /******************************************************************************

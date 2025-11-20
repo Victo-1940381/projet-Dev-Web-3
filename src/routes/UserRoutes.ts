@@ -30,6 +30,7 @@ const Validators = {
  */
 async function getAll(_: IReq, res: IRes) {
   const users = await UserService.getAll();
+  
   res.status(HttpStatusCodes.OK).json({ users });
 }
 
@@ -39,7 +40,7 @@ async function getAll(_: IReq, res: IRes) {
 async function add(req: IReq, res: IRes) {
   const { user } = Validators.add(req.body);
   await UserService.addOne(user);
-  res.status(HttpStatusCodes.CREATED).end();
+  res.status(HttpStatusCodes.CREATED).json({"message":"l'utilisateur a été ajouté"});
 }
 
 /**
@@ -48,7 +49,7 @@ async function add(req: IReq, res: IRes) {
 async function update(req: IReq, res: IRes) {
   const { user } = Validators.update(req.body);
   await UserService.updateOne(user);
-  res.status(HttpStatusCodes.OK).end();
+  res.status(HttpStatusCodes.OK).json({"message":"l'utilisateur a été modifier"});
 }
 
 /**
@@ -57,7 +58,7 @@ async function update(req: IReq, res: IRes) {
 async function delete_(req: IReq, res: IRes) {
   const { id } = Validators.delete(req.params);
   await UserService.delete(id);
-  res.status(HttpStatusCodes.OK).end();
+  res.status(HttpStatusCodes.OK).json({"message":`l'utilisateur a été supprimer avec l'id : ${id}`});
 }
 
 
