@@ -39,6 +39,16 @@ if (ENV.NodeEnv === NodeEnvs.Production) {
     app.use(helmet());
   }
 }
+app.get('/api-docs/', async (req, res) => {
+    res.set('Content-Security-Policy', 'script-src blob:');
+    res.set('Content-Security-Policy', 'worker-src blob:');
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// redirige vers api-docs
+app.get('/', (req, res) => {
+    res.redirect('/api-docs');
+});
 app.use(authenticateToken);
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
@@ -67,15 +77,8 @@ app.set('views', viewsDir);
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
-// Nav to users pg by default
-app.get('/', (_: Request, res: Response) => {
-  return res.redirect('/users');
-});
+// rend disponible la documentation de l'interface logicielle
 
-// Redirect to login if not logged in.
-app.get('/users', (_: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
-});
 
 
 /******************************************************************************
