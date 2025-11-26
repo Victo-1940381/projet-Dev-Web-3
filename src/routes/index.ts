@@ -11,27 +11,27 @@ import JetonRoutes from './JetonRoutes';
 ******************************************************************************/
 
 const apiRouter = Router();
-/*export interface IRequestBody {
+export interface IRequestBody {
   jeuxvideo: IJeuxVideo;
-}*/
+}
 
 function validateJeuxVideo (req:Request,res:Response,next:NextFunction){
- 
-  if(req.body === null){
+  const body: IRequestBody = req.body as IRequestBody;
+  if(body === null){
     res
       .status(HttpStatusCodes.BAD_REQUEST)
       .send({error:'jeuxvideo requis'})
       .end();
     return;
   }
-  if(req.body.jeuxvideo === null){
+  if(body.jeuxvideo === null){
     res
       .status(HttpStatusCodes.BAD_REQUEST)
       .send({error:'jeuxvideo requis'})
       .end();
     return;
   }
-  const nouveljeuxvideo = new JeuxVideo(req.body.jeuxvideo);
+  const nouveljeuxvideo = new JeuxVideo(body.jeuxvideo);
   const error = nouveljeuxvideo.validateSync();
   if(error !== null && error !== undefined){
     res.status(HttpStatusCodes.BAD_REQUEST).send(error).end();

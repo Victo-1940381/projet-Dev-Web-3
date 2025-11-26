@@ -1,7 +1,8 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Response, Request, NextFunction } from 'express';
 import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import ENV from '@src/common/constants/ENV';
+import { IUser } from '@src/models/User';
 /**
  * Intergiciel pour authentifier le jeton de l'utilisateur
  *
@@ -23,8 +24,7 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
   console.log(token);
 
   if (token == null) return res.sendStatus(HttpStatusCodes.UNAUTHORIZED);
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any 
-  jwt.verify(token, ENV.Jwtsecret, (err: any, user: any) => {
+  jwt.verify(token, ENV.Jwtsecret, (err: Error|null) => {
     console.log(err);
 
     if (err) return res.sendStatus(HttpStatusCodes.FORBIDDEN);

@@ -45,8 +45,6 @@ export default defineConfig(
         { allowNumberAndString: true },
       ],
       '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-unsafe-member-access':0,
-      '@typescript-eslint/no-unsafe-assignment': 0,
       '@typescript-eslint/no-unsafe-enum-comparison': 0,
       '@typescript-eslint/no-unnecessary-type-parameters': 0,
       '@stylistic/js/no-extra-semi': 'warn',

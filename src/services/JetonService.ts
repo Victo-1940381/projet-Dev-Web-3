@@ -16,10 +16,9 @@ export const UTILISATEUR_NOT_FOUND_ERR = 'Utilisateur non trouvé';
  * @returns {Promise} - Le jeton signé
  */
 async function generateToken(utilisateur: IUserLogin): Promise<string> {
-  // eslint-disable-next-line @typescript-eslint/prefer-find
-  const utilisateurBD = (await UserService.getAll()).filter(
+  const utilisateurBD = (await UserService.getAll()).find(
     (user) => user.email === utilisateur.email,
-  )[0];
+  );
   if (utilisateurBD && utilisateurBD.password === utilisateur.password) {
     return jwt.sign(utilisateur.email, ENV.Jwtsecret);
   } else {
