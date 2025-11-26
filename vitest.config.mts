@@ -4,8 +4,9 @@ import path from 'path';
 const config = defineConfig({
   test: {
     globals: true,
-    setupFiles: ['./tests/setup-env.ts'],
-  
+    environment: 'node',
+    setupFiles: ['./tests/setup-env.ts', './tests/support/setup.ts'],
+    isolate: true,
   },
   resolve: {
     alias: {
