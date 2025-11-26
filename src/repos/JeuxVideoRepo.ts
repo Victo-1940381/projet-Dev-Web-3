@@ -1,6 +1,6 @@
 import { IJeuxVideo,JeuxVideo } from '@src/models/JeuxVideo';
-import ENV from "@src/common/constants/ENV";
-import mongoose from "mongoose";
+import ENV from '@src/common/constants/ENV';
+import mongoose from 'mongoose';
 import { error } from 'console';
 
 
@@ -12,16 +12,16 @@ import { error } from 'console';
 async function getOne(id: string): Promise<IJeuxVideo | null> {
   let jeuxvideo = null;
   if (mongoose.Types.ObjectId.isValid(id)){
-      jeuxvideo = await JeuxVideo.findById(id);
+    jeuxvideo = await JeuxVideo.findById(id);
   }
   
- return jeuxvideo;
+  return jeuxvideo;
 }
 async function getPlatforme(plateforme: string) : Promise<IJeuxVideo[]> {
-    const jeuxvideo = await JeuxVideo.find({
-        plateforme:plateforme,
-    })
-    return jeuxvideo
+  const jeuxvideo = await JeuxVideo.find({
+    plateforme:plateforme,
+  });
+  return jeuxvideo;
 }
 
 async function getAll(): Promise<IJeuxVideo[]> {
@@ -29,10 +29,10 @@ async function getAll(): Promise<IJeuxVideo[]> {
   return jeuxvideos;
 }
 async function getGenre(genre: string) : Promise<IJeuxVideo[]> {
-    const jeuxvideo = await JeuxVideo.find({
-       genre:genre
-    })
-    return jeuxvideo
+  const jeuxvideo = await JeuxVideo.find({
+    genre:genre,
+  });
+  return jeuxvideo;
 }
 
 async function add(jeuxvideo: IJeuxVideo): Promise<void> {
@@ -42,29 +42,29 @@ async function add(jeuxvideo: IJeuxVideo): Promise<void> {
 
 
 async function update(jeuxvideo:IJeuxVideo): Promise<void> {
- const jeuxAModifier = await JeuxVideo.findById(jeuxvideo.id);
- if (jeuxAModifier === null){
-    throw new Error("jeux video non trouvé");
- }
- jeuxAModifier.nom = jeuxvideo.nom;
- jeuxAModifier.plateforme = jeuxvideo.plateforme;
- jeuxAModifier.dateSortieinitial = jeuxvideo.dateSortieinitial;
- jeuxAModifier.nombreCopieVendu = jeuxvideo.nombreCopieVendu;
- jeuxAModifier.prix = jeuxvideo.prix;
- jeuxAModifier.developpeur = jeuxvideo.developpeur;
- jeuxAModifier.editeur = jeuxvideo.editeur;
- jeuxAModifier.genre = jeuxvideo.genre;
- jeuxAModifier.ESRB = jeuxvideo.ESRB;
- jeuxAModifier.modeDeJeu = jeuxvideo.modeDeJeu;
- jeuxAModifier.dureeJeux = jeuxvideo.dureeJeux;
- jeuxAModifier.disponible = jeuxvideo.disponible;
- jeuxAModifier.Metacritic = jeuxvideo.Metacritic;
-jeuxAModifier.save();
+  const jeuxAModifier = await JeuxVideo.findById(jeuxvideo.id);
+  if (jeuxAModifier === null){
+    throw new Error('jeux video non trouvé');
+  }
+  jeuxAModifier.nom = jeuxvideo.nom;
+  jeuxAModifier.plateforme = jeuxvideo.plateforme;
+  jeuxAModifier.dateSortieinitial = jeuxvideo.dateSortieinitial;
+  jeuxAModifier.nombreCopieVendu = jeuxvideo.nombreCopieVendu;
+  jeuxAModifier.prix = jeuxvideo.prix;
+  jeuxAModifier.developpeur = jeuxvideo.developpeur;
+  jeuxAModifier.editeur = jeuxvideo.editeur;
+  jeuxAModifier.genre = jeuxvideo.genre;
+  jeuxAModifier.ESRB = jeuxvideo.ESRB;
+  jeuxAModifier.modeDeJeu = jeuxvideo.modeDeJeu;
+  jeuxAModifier.dureeJeux = jeuxvideo.dureeJeux;
+  jeuxAModifier.disponible = jeuxvideo.disponible;
+  jeuxAModifier.Metacritic = jeuxvideo.Metacritic;
+  jeuxAModifier.save();
 }
 
 
 async function delete_(id: string): Promise<void> {
-    await JeuxVideo.deleteOne({_id:id});
+  await JeuxVideo.deleteOne({_id:id});
 }
 
 

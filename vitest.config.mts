@@ -4,7 +4,7 @@ import path from 'path';
 const config = defineConfig({
   test: {
     globals: true,
-    setupFiles: ['config.ts', './tests/support/setup.ts'],
+    setupFiles: ['./tests/setup-env.ts'],
   
   },
   resolve: {

@@ -14,199 +14,199 @@ import { agent } from './support/setup';
 
 
 const DB_JEUXVIDEO: IJeuxVideo[] = [
-      {
-        id:'1',
-  nom: 'super mario bros wonder',
-  plateforme: [
-    'Nintendo Switch'
-  ],
-  dateSortieinitial: new Date('2023-11-23'),
-  nombreCopieVendu: 16030000,
-  prix: 84.99,
-  developpeur: [
-    'Nintendo'
-  ],
-  editeur: [
-    'Nintendo'
-  ],
-  genre: [
-    'Platforme'
-  ],
-  modeDeJeu: [
-    'solo',
-    'multijoueur local',
-    'multijoueur en ligne'
-  ],
-  dureeJeux: 10,
-  disponible: true
-},
-{
-  id:'2',
-  nom: 'super mario 3d all-star',
-  plateforme: [
-    'Nintendo Switch'
-  ],
-  dateSortieinitial: new Date('2020-10-18'),
-  nombreCopieVendu: 9007000,
-  prix: 79.99,
-  developpeur: [
-    'Nintendo'
-  ],
-  editeur: [
-    'Nintendo'
-  ],
-  genre: [
-    'Platforme 3d',
-    'action-aventure'
-  ],
-  modeDeJeu: [
-    'solo',
-    'multijoueur local'
-  ],
-  dureeJeux: 0,
-  disponible: false
-},
-{
+  {
+    id:'1',
+    nom: 'super mario bros wonder',
+    plateforme: [
+      'Nintendo Switch',
+    ],
+    dateSortieinitial: new Date('2023-11-23'),
+    nombreCopieVendu: 16030000,
+    prix: 84.99,
+    developpeur: [
+      'Nintendo',
+    ],
+    editeur: [
+      'Nintendo',
+    ],
+    genre: [
+      'Platforme',
+    ],
+    modeDeJeu: [
+      'solo',
+      'multijoueur local',
+      'multijoueur en ligne',
+    ],
+    dureeJeux: 10,
+    disponible: true,
+  },
+  {
+    id:'2',
+    nom: 'super mario 3d all-star',
+    plateforme: [
+      'Nintendo Switch',
+    ],
+    dateSortieinitial: new Date('2020-10-18'),
+    nombreCopieVendu: 9007000,
+    prix: 79.99,
+    developpeur: [
+      'Nintendo',
+    ],
+    editeur: [
+      'Nintendo',
+    ],
+    genre: [
+      'Platforme 3d',
+      'action-aventure',
+    ],
+    modeDeJeu: [
+      'solo',
+      'multijoueur local',
+    ],
+    dureeJeux: 0,
+    disponible: false,
+  },
+  {
  
- id:'3',
-  nom: 'Doom',
-  plateforme: [
-    'Windows',
-    'Mac OS',
-    'Linux',
-    '32X',
-    '3DO',
-    'GBA',
-    'Jaguar',
-    'Playstation',
-    'Xbox 360',
-    'Saturn',
-    'Super nintendo',
-    'Nintendo Switch'
-  ],
-  dateSortieinitial: new Date('1994-1-10'),
-  nombreCopieVendu: 20000000,
-  prix: 6.04,
-  developpeur: [
-    'id software',
-    ' Nightdive Studio'
-  ],
-  editeur: [
-    'Bethesda'
-  ],
-  genre: [
-    'FPS'
-  ],
-  modeDeJeu: [
-    'solo'
-  ],
-  dureeJeux: 5,
-  disponible: true
-}] as const;
+    id:'3',
+    nom: 'Doom',
+    plateforme: [
+      'Windows',
+      'Mac OS',
+      'Linux',
+      '32X',
+      '3DO',
+      'GBA',
+      'Jaguar',
+      'Playstation',
+      'Xbox 360',
+      'Saturn',
+      'Super nintendo',
+      'Nintendo Switch',
+    ],
+    dateSortieinitial: new Date('1994-1-10'),
+    nombreCopieVendu: 20000000,
+    prix: 6.04,
+    developpeur: [
+      'id software',
+      ' Nightdive Studio',
+    ],
+    editeur: [
+      'Bethesda',
+    ],
+    genre: [
+      'FPS',
+    ],
+    modeDeJeu: [
+      'solo',
+    ],
+    dureeJeux: 5,
+    disponible: true,
+  }] as const;
 const compareJeuxVideoArrays = customDeepCompare ({
-    onlyCompareProps: ['nom','plateforme','nombreCopieVendu','prix','developpeur','editeur','genre','modeDeJeu','dureeJeux','disponible'],
+  onlyCompareProps: ['nom','plateforme','nombreCopieVendu','prix','developpeur','editeur','genre','modeDeJeu','dureeJeux','disponible'],
     
 });
 import mockify from '@jazim/mock-mongoose';
 
 
 describe('JeuxVideoRouter', () => {
-    let dbJeuxvideo: IJeuxVideo[]= [];
+  const dbJeuxvideo: IJeuxVideo[]= [];
 
-    describe(`'GET:${Paths.jeuxvideo.Getall}'`, () => {
-        it(
-            'doit retourné un JSON avec tous les Jeux vidéo et un code de ' + `of '${HttpStatusCodes.OK}' si réussi`,
-            async () => {
-                const data = [...DB_JEUXVIDEO];
-                mockify(JeuxVideo).toReturn(data, 'find');
-                const res: TRes<{ jeuxvideos: IJeuxVideo[]}> = await agent.get(Paths.jeuxvideo.Getall);
-               //console.log(res.body.jeuxvideos);
-                expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO)).toBeTruthy();
-            },
-        );
-    });
-    describe(`'GET:${Paths.jeuxvideo.GetOne}'`, () => {
-        const getPath = (id: string) => 
-            insertUrlParams(Paths.jeuxvideo.GetOne, { id });
-        it(
-            `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
-            async () =>{
-              const data = [...DB_JEUXVIDEO];
-                mockify(JeuxVideo)
-                .toReturn(DB_JEUXVIDEO[0], 'findOne')
-                const id = DB_JEUXVIDEO[0].id
-               const res: TRes<{jeuxvideo: IJeuxVideo}> = await agent.get(getPath(id!));
-             console.log(res.body.jeuxvideo);
-              // console.log(DB_JEUXVIDEO[0]);
-                expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxvideo, DB_JEUXVIDEO[0] )).toBeTruthy();
-            },
-        );
-    });
-      describe(`'GET:${Paths.jeuxvideo.GetGenre}'`, () => {
-        const getPath = (genre: string) => 
-            insertUrlParams(Paths.jeuxvideo.GetGenre, { genre });
-        it(
-            `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
-            async () =>{
-                mockify(JeuxVideo)
-                .toReturn(DB_JEUXVIDEO[0], 'find')
-                const genre = DB_JEUXVIDEO[0].genre[0]
-               const res: TRes<{jeuxvideos: IJeuxVideo[]}> = await agent.get(getPath(genre));
-                expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO[0] )).toBeTruthy();
-            },
-        );
-    });
-      describe(`'GET:${Paths.jeuxvideo.GetPlatforme}'`, () => {
-        const getPath = (plateforme: string) => 
-            insertUrlParams(Paths.jeuxvideo.GetPlatforme, { plateforme });
-        it(
-            `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
-            async () =>{
-                mockify(JeuxVideo)
-                .toReturn(DB_JEUXVIDEO, 'find')
-                const plateforme = DB_JEUXVIDEO[0].plateforme[0]
-               const res: TRes<{jeuxvideos: IJeuxVideo[]}> = await agent.get(getPath(plateforme));
-                expect(res.status).toBe(HttpStatusCodes.OK);
-                expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO )).toBeTruthy();
-            },
-        );
-    });
-    describe(`'POST:${Paths.jeuxvideo.Add}'`, () => {
+  describe(`'GET:${Paths.jeuxvideo.Getall}'`, () => {
+    it(
+      'doit retourné un JSON avec tous les Jeux vidéo et un code de ' + `of '${HttpStatusCodes.OK}' si réussi`,
+      async () => {
+        const data = [...DB_JEUXVIDEO];
+        mockify(JeuxVideo).toReturn(data, 'find');
+        const res: TRes<{ jeuxvideos: IJeuxVideo[]}> = await agent.get(Paths.jeuxvideo.Getall);
+        //console.log(res.body.jeuxvideos);
+        expect(res.status).toBe(HttpStatusCodes.OK);
+        expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO)).toBeTruthy();
+      },
+    );
+  });
+  describe(`'GET:${Paths.jeuxvideo.GetOne}'`, () => {
+    const getPath = (id: string) => 
+      insertUrlParams(Paths.jeuxvideo.GetOne, { id });
+    it(
+      `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
+      async () =>{
+        const data = [...DB_JEUXVIDEO];
+        mockify(JeuxVideo)
+          .toReturn(DB_JEUXVIDEO[0], 'findOne');
+        const id = DB_JEUXVIDEO[0].id;
+        const res: TRes<{jeuxvideo: IJeuxVideo}> = await agent.get(getPath(id!));
+        console.log(res.body.jeuxvideo);
+        // console.log(DB_JEUXVIDEO[0]);
+        expect(res.status).toBe(HttpStatusCodes.OK);
+        expect(compareJeuxVideoArrays(res.body.jeuxvideo, DB_JEUXVIDEO[0] )).toBeTruthy();
+      },
+    );
+  });
+  describe(`'GET:${Paths.jeuxvideo.GetGenre}'`, () => {
+    const getPath = (genre: string) => 
+      insertUrlParams(Paths.jeuxvideo.GetGenre, { genre });
+    it(
+      `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
+      async () =>{
+        mockify(JeuxVideo)
+          .toReturn(DB_JEUXVIDEO[0], 'find');
+        const genre = DB_JEUXVIDEO[0].genre[0];
+        const res: TRes<{jeuxvideos: IJeuxVideo[]}> = await agent.get(getPath(genre));
+        expect(res.status).toBe(HttpStatusCodes.OK);
+        expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO[0] )).toBeTruthy();
+      },
+    );
+  });
+  describe(`'GET:${Paths.jeuxvideo.GetPlatforme}'`, () => {
+    const getPath = (plateforme: string) => 
+      insertUrlParams(Paths.jeuxvideo.GetPlatforme, { plateforme });
+    it(
+      `doit retourné un code de '${HttpStatusCodes.OK}' si réussi`,
+      async () =>{
+        mockify(JeuxVideo)
+          .toReturn(DB_JEUXVIDEO, 'find');
+        const plateforme = DB_JEUXVIDEO[0].plateforme[0];
+        const res: TRes<{jeuxvideos: IJeuxVideo[]}> = await agent.get(getPath(plateforme));
+        expect(res.status).toBe(HttpStatusCodes.OK);
+        expect(compareJeuxVideoArrays(res.body.jeuxvideos, DB_JEUXVIDEO )).toBeTruthy();
+      },
+    );
+  });
+  describe(`'POST:${Paths.jeuxvideo.Add}'`, () => {
     // Ajout réussi
     it(
       `doit retourner le code '${HttpStatusCodes.CREATED}' si la ` +
         'transaction est réussie',
       async () => {
         const jeuxvideo: IJeuxVideo = {
-            id:'12',
-             nom: 'testadd',
-  plateforme: [
-    'Windows',
-    'Mac OS',
-    'Linux'
-  ],
-  dateSortieinitial: new Date(1994-1-10),
-  nombreCopieVendu: 200,
-  prix: 6.00,
-  developpeur: [
-    'id software'
-  ],
-  editeur: [
-    'Bethesda'
-  ],
-  genre: [
-    'FPS'
-  ],
-  modeDeJeu: [
-    'solo'
-  ],
-  dureeJeux: 1,
-  disponible: false
+          id:'12',
+          nom: 'testadd',
+          plateforme: [
+            'Windows',
+            'Mac OS',
+            'Linux',
+          ],
+          dateSortieinitial: new Date(1994-1-10),
+          nombreCopieVendu: 200,
+          prix: 6.00,
+          developpeur: [
+            'id software',
+          ],
+          editeur: [
+            'Bethesda',
+          ],
+          genre: [
+            'FPS',
+          ],
+          modeDeJeu: [
+            'solo',
+          ],
+          dureeJeux: 1,
+          disponible: false,
 
-};
+        };
         // Préparer le simulacre de Mongoose
         mockify(JeuxVideo).toReturn(jeuxvideo, 'save');
         const res = await agent.post(Paths.jeuxvideo.Add).send({ jeuxvideo });
@@ -228,7 +228,7 @@ describe('JeuxVideoRouter', () => {
       },
     );
   });
-   describe(`'PUT:${Paths.jeuxvideo.Update}'`, () => {
+  describe(`'PUT:${Paths.jeuxvideo.Update}'`, () => {
     // Succès
     it(
       `doit retourner un code de '${HttpStatusCodes.OK}' si la mise à jour ` +
@@ -253,28 +253,28 @@ describe('JeuxVideoRouter', () => {
         mockify(JeuxVideo).toReturn(null, 'findOne');
         const jeuxvideo = {
             id: '4',
-           nom: 'test',
+            nom: 'test',
             plateforme: [
-    'Windows',
-  ],
-  dateSortieinitial: new Date(1994-1-10),
-  nombreCopieVendu: 200,
-  prix: 6.00,
-  developpeur: [
-    'id software'
-  ],
-  editeur: [
-    'Bethesda'
-  ],
-  genre: [
-    'FPS'
-  ],
+              'Windows',
+            ],
+            dateSortieinitial: new Date(1994-1-10),
+            nombreCopieVendu: 200,
+            prix: 6.00,
+            developpeur: [
+              'id software',
+            ],
+            editeur: [
+              'Bethesda',
+            ],
+            genre: [
+              'FPS',
+            ],
 
-  modeDeJeu: [
-    'solo'
-  ],
-  dureeJeux: 1,
-  disponible: false
+            modeDeJeu: [
+              'solo',
+            ],
+            dureeJeux: 1,
+            disponible: false,
 
           },
           res: TRes = await agent.put(Paths.jeuxvideo.Update).send({ jeuxvideo });
@@ -284,7 +284,7 @@ describe('JeuxVideoRouter', () => {
       },
     );
   });
-    describe(`'DELETE:${Paths.jeuxvideo.Delete}'`, () => {
+  describe(`'DELETE:${Paths.jeuxvideo.Delete}'`, () => {
     const getPath = (id: string) =>
       insertUrlParams(Paths.jeuxvideo.Delete, { id });
 

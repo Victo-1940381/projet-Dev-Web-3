@@ -11,7 +11,7 @@ export default {
     Update: '/modifier',
     Delete: '/supprimer/:id',
   },
-   GenerateToken: {
+  GenerateToken: {
     Base: '/generatetoken',
     Get: '/',
   },

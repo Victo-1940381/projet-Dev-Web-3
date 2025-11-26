@@ -20,14 +20,14 @@ function getAll(): Promise<IJeuxVideo[]> {
   return JeuxVideoRepo.getAll();
 }
 function getOne(id:string) : Promise<IJeuxVideo | null>{
-    return JeuxVideoRepo.getOne(id);
+  return JeuxVideoRepo.getOne(id);
 }
 
 function getPlatforme(plateforme:string) : Promise<IJeuxVideo[]>{
-    return JeuxVideoRepo.getPlatforme(plateforme);
+  return JeuxVideoRepo.getPlatforme(plateforme);
 }
 function getGenre(genre: string): Promise<IJeuxVideo[]>{
-    return JeuxVideoRepo.getGenre(genre);
+  return JeuxVideoRepo.getGenre(genre);
 }
 
 function addOne(jeuxvideo: IJeuxVideo): Promise<void> {
@@ -36,11 +36,11 @@ function addOne(jeuxvideo: IJeuxVideo): Promise<void> {
 
 
 async function updateOne(jeuxvideo:IJeuxVideo): Promise<void> {
- const persists = await JeuxVideoRepo.getOne(jeuxvideo.id!);
- if(!persists){
-  throw new RouteError(HttpStatusCodes.NOT_FOUND, JEUXVIDEO_NON_TROUVE);
- }
- return JeuxVideoRepo.update(jeuxvideo);
+  const persists = await JeuxVideoRepo.getOne(jeuxvideo.id!);
+  if(!persists){
+    throw new RouteError(HttpStatusCodes.NOT_FOUND, JEUXVIDEO_NON_TROUVE);
+  }
+  return JeuxVideoRepo.update(jeuxvideo);
 }
 
 

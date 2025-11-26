@@ -23,7 +23,7 @@ async function generateToken(req: IReq, res: IRes) {
   const { userLogin } = Validators.generatetoken(req.body);
   const token = await JetonService.generateToken(userLogin);
   if(token.trim().length === 0){
-    return res.status (HttpStatusCodes.NOT_FOUND).send({"message":"l'utilisateur n'existe pas"})
+    return res.status (HttpStatusCodes.NOT_FOUND).send({'message':'l\'utilisateur n\'existe pas'});
   }
   else{return res.status (HttpStatusCodes.OK).send({ token: token });}
   

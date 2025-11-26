@@ -3,9 +3,7 @@ import { Request, Response, NextFunction, Router } from 'express';
 import Paths from '@src/common/constants/Paths';
 import JeuxVideoRoute from './JeuxVideoRoute';
 import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
-import { error } from 'console';
-import { JeuxVideo } from '@src/models/JeuxVideo';
-
+import { IJeuxVideo, JeuxVideo } from '@src/models/JeuxVideo';
 import UserRoutes from './UserRoutes';
 import JetonRoutes from './JetonRoutes';
 /******************************************************************************
@@ -13,29 +11,34 @@ import JetonRoutes from './JetonRoutes';
 ******************************************************************************/
 
 const apiRouter = Router();
+/*export interface IRequestBody {
+  jeuxvideo: IJeuxVideo;
+}*/
 
 function validateJeuxVideo (req:Request,res:Response,next:NextFunction){
-    if(req.body === null){
-        res
-        .status(HttpStatusCodes.BAD_REQUEST)
-        .send({error:"jeuxvideo requis"})
-        .end();
-        return;
-    }
-    if(req.body.jeuxvideo === null){
-         res
-        .status(HttpStatusCodes.BAD_REQUEST)
-        .send({error:"jeuxvideo requis"})
-        .end();
-        return;
-    }
-    const nouveljeuxvideo = new JeuxVideo(req.body.jeuxvideo);
-    const error = nouveljeuxvideo.validateSync();
-    if(error !== null && error !== undefined){
-        res.status(HttpStatusCodes.BAD_REQUEST).send(error).end();
-    }else{
-        next();
-    }
+ 
+  if(req.body === null){
+    res
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .send({error:'jeuxvideo requis'})
+      .end();
+    return;
+  }
+  if(req.body.jeuxvideo === null){
+    res
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .send({error:'jeuxvideo requis'})
+      .end();
+    return;
+  }
+  const nouveljeuxvideo = new JeuxVideo(req.body.jeuxvideo);
+  const error = nouveljeuxvideo.validateSync();
+  if(error !== null && error !== undefined){
+    res.status(HttpStatusCodes.BAD_REQUEST).send(error).end();
+  }else{
+    next();
+  }
+
 }
 // ** Add JeuxVideoRouter ** //
 const tokenRouter = Router();

@@ -39,15 +39,16 @@ if (ENV.NodeEnv === NodeEnvs.Production) {
     app.use(helmet());
   }
 }
+// eslint-disable-next-line @typescript-eslint/require-await
 app.get('/api-docs/', async (req, res) => {
-    res.set('Content-Security-Policy', 'script-src blob:');
-    res.set('Content-Security-Policy', 'worker-src blob:');
-    res.sendFile(path.join(__dirname, 'index.html'));
+  res.set('Content-Security-Policy', 'script-src blob:');
+  res.set('Content-Security-Policy', 'worker-src blob:');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // redirige vers api-docs
 app.get('/', (req, res) => {
-    res.redirect('/api-docs');
+  res.redirect('/api-docs');
 });
 app.use(authenticateToken);
 // Add APIs, must be after middleware

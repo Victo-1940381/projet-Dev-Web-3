@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 import { Response, Request, NextFunction } from 'express';
 import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import ENV from '@src/common/constants/ENV';
@@ -17,14 +17,14 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
     return;
   }
 
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.split(' ')[1];
 
   console.log(token);
 
   if (token == null) return res.sendStatus(HttpStatusCodes.UNAUTHORIZED);
-
-  jwt.verify(token, ENV.Jwtsecret as string, (err: any, user: any) => {
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any 
+  jwt.verify(token, ENV.Jwtsecret, (err: any, user: any) => {
     console.log(err);
 
     if (err) return res.sendStatus(HttpStatusCodes.FORBIDDEN);
