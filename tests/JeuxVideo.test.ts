@@ -107,7 +107,7 @@ const compareJeuxVideoArrays = customDeepCompare ({
     onlyCompareProps: ['nom','plateforme','nombreCopieVendu','prix','developpeur','editeur','genre','modeDeJeu','dureeJeux','disponible'],
     
 });
-const mockify = require('@jazim/mock-mongoose');
+import mockify from '@jazim/mock-mongoose';
 
 
 describe('JeuxVideoRouter', () => {
@@ -238,7 +238,7 @@ describe('JeuxVideoRouter', () => {
         jeuxvideo.nom = 'test de modif';
 
         // Préparer le simulacre de Mongoose
-        mockify(JeuxVideo).toReturn(jeuxvideo, 'findById').toReturn(jeuxvideo, 'save');
+        mockify(JeuxVideo).toReturn(jeuxvideo, 'findOne').toReturn(jeuxvideo, 'save');
 
         const res = await agent.put(Paths.jeuxvideo.Update).send({ jeuxvideo });
         expect(res.status).toBe(HttpStatusCodes.OK);
