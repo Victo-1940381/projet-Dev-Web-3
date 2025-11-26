@@ -49,15 +49,15 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-unsafe-enum-comparison': 0,
       '@typescript-eslint/no-unnecessary-type-parameters': 0,
-      '@stylistic/js/no-extra-semi': 'warn',
+      '@stylistic/no-extra-semi': 'warn',
       'max-len': [
         'warn',
         {
           'code': 80,
         },
       ],
-      '@stylistic/ts/semi': ['warn', 'always'],
-      '@stylistic/ts/member-delimiter-style': ['warn', {
+      '@stylistic/semi': ['warn', 'always'],
+      '@stylistic/member-delimiter-style': ['warn', {
         'multiline': {
           'delimiter': 'comma',
           'requireLast': true,

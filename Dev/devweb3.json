@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "68d57bed9458d8096468aa40"
+  },
+  "nom": "super mario bros wonder",
+  "plateforme": [
+    "Nintendo Switch"
+  ],
+  "dateSortieinitial": {
+    "$date": "2023-11-23T05:00:00.000Z"
+  },
+  "nombreCopieVendu": 16030000,
+  "prix": 84.99,
+  "developpeur": [
+    "Nintendo"
+  ],
+  "editeur": [
+    "Nintendo"
+  ],
+  "genre": [
+    "Platforme"
+  ],
+  "ESRB": "E",
+  "modeDeJeu": [
+    "solo",
+    "multijoueur local",
+    "multijoueur en ligne"
+  ],
+  "dureeJeux": 10,
+  "disponible": true,
+  "Metacritic": 92
+},
+{
+  "_id": {
+    "$oid": "68d57bed9458d8096468aa41"
+  },
+  "nom": "super mario 3d all-star",
+  "plateforme": [
+    "Nintendo Switch"
+  ],
+  "dateSortieinitial": {
+    "$date": "2020-10-18T04:00:00.000Z"
+  },
+  "nombreCopieVendu": 9007000,
+  "prix": 79.99,
+  "developpeur": [
+    "Nintendo"
+  ],
+  "editeur": [
+    "Nintendo"
+  ],
+  "genre": [
+    "Platforme 3d",
+    "action-aventure"
+  ],
+  "ESRB": "E",
+  "modeDeJeu": [
+    "solo",
+    "multijoueur local"
+  ],
+  "dureeJeux": 0,
+  "disponible": false,
+  "Metacritic": 82
+}]
