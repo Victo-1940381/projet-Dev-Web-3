@@ -42,7 +42,7 @@ function validateJeuxVideo (req:Request,res:Response,next:NextFunction){
 }
 // ** Add JeuxVideoRouter ** //
 const tokenRouter = Router();
-tokenRouter.get(Paths.GenerateToken.Get, JetonRoutes.generateToken);
+tokenRouter.post(Paths.GenerateToken.Get, JetonRoutes.generateToken);
 
 // ** Add tokenRouter ** //
 apiRouter.use(Paths.GenerateToken.Base, tokenRouter);
