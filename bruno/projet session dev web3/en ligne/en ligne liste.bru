@@ -1,0 +1,20 @@
+meta {
+  name: en ligne liste
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://jeuxvideoapi-d4a9b0azcfgpd7h9.canadacentral-01.azurewebsites.net/api/jeuxvideo/liste
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
