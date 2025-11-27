@@ -586,7 +586,7 @@ paths:
                       error:
                         type: "string"
   "/api/generatetoken":
-      post:
+    post:
         description: "génère un token d'autentification pour les route"
         tags: 
          - "Gestion token"
