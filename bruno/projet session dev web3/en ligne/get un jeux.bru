@@ -5,11 +5,20 @@ meta {
 }
 
 get {
-  url: 
+  url: https://jeuxvideoapi-d4a9b0azcfgpd7h9.canadacentral-01.azurewebsites.net/api/jeuxvideo/:id
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+params:path {
+  id: 68d57bed9458d8096468aa41
+}
+
+auth:bearer {
+  token: {{tokenonline}}
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
