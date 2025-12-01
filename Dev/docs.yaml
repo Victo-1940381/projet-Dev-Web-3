@@ -6,6 +6,8 @@ info:
 servers: 
   - url: "http://localhost:3000/"
     description: "serveur de devloppement"
+  - url: "https://jeuxvideoapi-d4a9b0azcfgpd7h9.canadacentral-01.azurewebsites.net/"
+    description: "serveur en ligne"
 paths: 
   "/api/jeuxvideo/liste":
       get:
